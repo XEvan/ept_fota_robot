@@ -55,17 +55,19 @@ case014
 	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 获取超时
 	fota_enable_precondition    True    True   True    True
     sys_pwr_mode    no_off
-    ${status}   simulation_message  ICC     IAM     logistic_mnf_req
+    ${status}   fota_get_logistics_manifest_req
     fota_assert     ${status}[0]    True    ${status}[1]
     disconnect_ecu      IAM     ICC
-    ${status}   fota_check_version_req
+    ${status}   fota_get_logistics_manifest_resp
     fota_assert     ${status}[0]    False    ${status}[1]
 
 case015
 	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 获取成功
 	fota_enable_precondition    True    True   True    True
     sys_pwr_mode    no_off
-    ${status}   simulation_message  ICC     IAM     logistic_mnf_req
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_get_logistics_manifest_resp
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_check_version_req
     fota_assert     ${status}[0]    True    ${status}[1]
