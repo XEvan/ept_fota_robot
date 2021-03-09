@@ -26,8 +26,6 @@ def vin_validate(status=True):
     # ICC的VIN码：F190
     # 车辆VIN不匹配(BCM&ICC)：D500
     id = 0x500
-    data = [random.randint(0, 15) for i in range(0, 8)]
-    XLDriverHandles.xldriver_can_handle.can_send_in_single(id, data)
     return True
 
 
