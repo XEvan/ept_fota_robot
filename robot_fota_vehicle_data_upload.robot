@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   FOTA车辆数据上传测试用例
-Resource    app_fota/importer.robot
+Resource    app_fota/resources.robot
 
 Suite Setup       start    # 所有测试用例执行之前的操作
 Suite Teardown    stop    # 所有测试用例执行完成的操作
