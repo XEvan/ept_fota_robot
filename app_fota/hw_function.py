@@ -1,5 +1,9 @@
 from app_fota.hw_handles import XLDriverHandles
 
+"""
+    硬件的初始化
+"""
+
 
 def hw_setup():
     """

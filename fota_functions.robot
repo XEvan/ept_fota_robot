@@ -1,6 +1,7 @@
 *** Settings ***
-Library           app_fota/function_manager.py
-Library           app_fota/hw_function.py
+Library           app_fota/robot_manager.py     # 所有测试用例执行前后
+Library           app_fota/hw_function.py       # 硬件
+Library           app_fota/fota_enable/function_fota_enable.py      #
 
 Suite Setup       start    # 所有测试用例执行之前的操作
 Suite Teardown    stop    # 所有测试用例执行完成的操作

@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.2 (Python 3.7.2 on win32)" generated="20210309 09:45:49.563" rpa="false">
+<suite id="s1" name="Fota Functions" source="D:\02_projects\07_vnxx\framework_robot\fota_functions.robot">
+<kw name="Start" library="robot_manager" type="setup">
+<doc>所有测试用例执行之前执行的功能
+:return:</doc>
+<msg timestamp="20210309 09:45:51.940" level="INFO">------start------</msg>
+<status status="PASS" starttime="20210309 09:45:51.940" endtime="20210309 09:45:51.940"></status>
+</kw>
+<test id="s1-t1" name="case001">
+<kw name="Hw Setup" library="hw_function" type="setup">
+<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
+:return:</doc>
+<msg timestamp="20210309 09:45:51.946" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.946" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210309 09:45:51.946" level="INFO">close driver: 0</msg>
+<msg timestamp="20210309 09:45:51.947" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.947" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
+<msg timestamp="20210309 09:45:51.949" level="INFO">open port: 101 c_long(-1)</msg>
+<msg timestamp="20210309 09:45:51.949" level="INFO">set notification: 118</msg>
+<msg timestamp="20210309 09:45:51.949" level="INFO">set bypass: 118</msg>
+<msg timestamp="20210309 09:45:51.950" level="INFO">activate status: 112</msg>
+<msg timestamp="20210309 09:45:51.950" level="INFO">activate status: 112</msg>
+<status status="PASS" starttime="20210309 09:45:51.940" endtime="20210309 09:45:51.950"></status>
+</kw>
+<kw name="Fota Function Enable Configuration" library="function_fota_enable">
+<doc>获取FOTA功能使能配置字字段配置
+:param enable: True:有效  False:无效
+:return:</doc>
+<arguments>
+<arg>True</arg>
+</arguments>
+<status status="PASS" starttime="20210309 09:45:51.950" endtime="20210309 09:45:51.950"></status>
+</kw>
+<kw name="Vin Validate" library="function_fota_enable">
+<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
+:param enable: True:一致  False:不一致
+:return:</doc>
+<arguments>
+<arg>True</arg>
+</arguments>
+<msg timestamp="20210309 09:45:51.953" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210309 09:45:51.950" endtime="20210309 09:45:51.953"></status>
+</kw>
+<kw name="Hw Teardown" library="hw_function" type="teardown">
+<doc>硬件teardown
+:return:</doc>
+<msg timestamp="20210309 09:45:51.954" level="INFO">deactivate status: 101</msg>
+<msg timestamp="20210309 09:45:51.954" level="INFO">close port: 118</msg>
+<msg timestamp="20210309 09:45:51.954" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210309 09:45:51.953" endtime="20210309 09:45:51.954"></status>
+</kw>
+<status status="FAIL" starttime="20210309 09:45:51.940" endtime="20210309 09:45:51.954" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+</test>
+<test id="s1-t2" name="case002">
+<kw name="Hw Setup" library="hw_function" type="setup">
+<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
+:return:</doc>
+<msg timestamp="20210309 09:45:51.955" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.955" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210309 09:45:51.955" level="INFO">close driver: 0</msg>
+<msg timestamp="20210309 09:45:51.956" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.957" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
+<msg timestamp="20210309 09:45:51.958" level="INFO">open port: 101 c_long(-1)</msg>
+<msg timestamp="20210309 09:45:51.958" level="INFO">set notification: 118</msg>
+<msg timestamp="20210309 09:45:51.958" level="INFO">set bypass: 118</msg>
+<msg timestamp="20210309 09:45:51.958" level="INFO">activate status: 112</msg>
+<msg timestamp="20210309 09:45:51.958" level="INFO">activate status: 112</msg>
+<status status="PASS" starttime="20210309 09:45:51.955" endtime="20210309 09:45:51.958"></status>
+</kw>
+<kw name="Fota Function Enable Configuration" library="function_fota_enable">
+<doc>获取FOTA功能使能配置字字段配置
+:param enable: True:有效  False:无效
+:return:</doc>
+<arguments>
+<arg>True</arg>
+</arguments>
+<status status="PASS" starttime="20210309 09:45:51.958" endtime="20210309 09:45:51.959"></status>
+</kw>
+<kw name="Vin Validate" library="function_fota_enable">
+<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
+:param enable: True:一致  False:不一致
+:return:</doc>
+<arguments>
+<arg>True</arg>
+</arguments>
+<msg timestamp="20210309 09:45:51.960" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210309 09:45:51.959" endtime="20210309 09:45:51.960"></status>
+</kw>
+<kw name="Hw Teardown" library="hw_function" type="teardown">
+<doc>硬件teardown
+:return:</doc>
+<msg timestamp="20210309 09:45:51.960" level="INFO">deactivate status: 101</msg>
+<msg timestamp="20210309 09:45:51.961" level="INFO">close port: 118</msg>
+<msg timestamp="20210309 09:45:51.961" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210309 09:45:51.960" endtime="20210309 09:45:51.961"></status>
+</kw>
+<status status="FAIL" starttime="20210309 09:45:51.954" endtime="20210309 09:45:51.961" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+</test>
+<test id="s1-t3" name="case003">
+<kw name="Hw Setup" library="hw_function" type="setup">
+<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
+:return:</doc>
+<msg timestamp="20210309 09:45:51.962" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.962" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210309 09:45:51.962" level="INFO">close driver: 0</msg>
+<msg timestamp="20210309 09:45:51.963" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.964" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
+<msg timestamp="20210309 09:45:51.965" level="INFO">open port: 101 c_long(-1)</msg>
+<msg timestamp="20210309 09:45:51.965" level="INFO">set notification: 118</msg>
+<msg timestamp="20210309 09:45:51.965" level="INFO">set bypass: 118</msg>
+<msg timestamp="20210309 09:45:51.965" level="INFO">activate status: 112</msg>
+<msg timestamp="20210309 09:45:51.965" level="INFO">activate status: 112</msg>
+<status status="PASS" starttime="20210309 09:45:51.961" endtime="20210309 09:45:51.965"></status>
+</kw>
+<kw name="Fota Function Enable Configuration" library="function_fota_enable">
+<doc>获取FOTA功能使能配置字字段配置
+:param enable: True:有效  False:无效
+:return:</doc>
+<arguments>
+<arg>False</arg>
+</arguments>
+<status status="PASS" starttime="20210309 09:45:51.966" endtime="20210309 09:45:51.966"></status>
+</kw>
+<kw name="Vin Validate" library="function_fota_enable">
+<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
+:param enable: True:一致  False:不一致
+:return:</doc>
+<arguments>
+<arg>True</arg>
+</arguments>
+<msg timestamp="20210309 09:45:51.967" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210309 09:45:51.966" endtime="20210309 09:45:51.967"></status>
+</kw>
+<kw name="Hw Teardown" library="hw_function" type="teardown">
+<doc>硬件teardown
+:return:</doc>
+<msg timestamp="20210309 09:45:51.967" level="INFO">deactivate status: 101</msg>
+<msg timestamp="20210309 09:45:51.967" level="INFO">close port: 118</msg>
+<msg timestamp="20210309 09:45:51.968" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210309 09:45:51.967" endtime="20210309 09:45:51.968"></status>
+</kw>
+<status status="FAIL" starttime="20210309 09:45:51.961" endtime="20210309 09:45:51.968" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+</test>
+<test id="s1-t4" name="case004">
+<kw name="Hw Setup" library="hw_function" type="setup">
+<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
+:return:</doc>
+<msg timestamp="20210309 09:45:51.969" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.969" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210309 09:45:51.969" level="INFO">close driver: 0</msg>
+<msg timestamp="20210309 09:45:51.969" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.970" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
+<msg timestamp="20210309 09:45:51.971" level="INFO">open port: 101 c_long(-1)</msg>
+<msg timestamp="20210309 09:45:51.971" level="INFO">set notification: 118</msg>
+<msg timestamp="20210309 09:45:51.971" level="INFO">set bypass: 118</msg>
+<msg timestamp="20210309 09:45:51.972" level="INFO">activate status: 112</msg>
+<msg timestamp="20210309 09:45:51.972" level="INFO">activate status: 112</msg>
+<status status="PASS" starttime="20210309 09:45:51.968" endtime="20210309 09:45:51.972"></status>
+</kw>
+<kw name="Fota Function Enable Configuration" library="function_fota_enable">
+<doc>获取FOTA功能使能配置字字段配置
+:param enable: True:有效  False:无效
+:return:</doc>
+<arguments>
+<arg>True</arg>
+</arguments>
+<status status="PASS" starttime="20210309 09:45:51.972" endtime="20210309 09:45:51.972"></status>
+</kw>
+<kw name="Vin Validate" library="function_fota_enable">
+<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
+:param enable: True:一致  False:不一致
+:return:</doc>
+<arguments>
+<arg>False</arg>
+</arguments>
+<msg timestamp="20210309 09:45:51.973" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210309 09:45:51.972" endtime="20210309 09:45:51.973"></status>
+</kw>
+<kw name="Hw Teardown" library="hw_function" type="teardown">
+<doc>硬件teardown
+:return:</doc>
+<msg timestamp="20210309 09:45:51.974" level="INFO">deactivate status: 101</msg>
+<msg timestamp="20210309 09:45:51.974" level="INFO">close port: 118</msg>
+<msg timestamp="20210309 09:45:51.974" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210309 09:45:51.974" endtime="20210309 09:45:51.974"></status>
+</kw>
+<status status="FAIL" starttime="20210309 09:45:51.968" endtime="20210309 09:45:51.974" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+</test>
+<test id="s1-t5" name="case005">
+<kw name="Hw Setup" library="hw_function" type="setup">
+<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
+:return:</doc>
+<msg timestamp="20210309 09:45:51.975" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.975" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210309 09:45:51.976" level="INFO">close driver: 0</msg>
+<msg timestamp="20210309 09:45:51.976" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.977" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
+<msg timestamp="20210309 09:45:51.978" level="INFO">open port: 101 c_long(-1)</msg>
+<msg timestamp="20210309 09:45:51.978" level="INFO">set notification: 118</msg>
+<msg timestamp="20210309 09:45:51.978" level="INFO">set bypass: 118</msg>
+<msg timestamp="20210309 09:45:51.978" level="INFO">activate status: 112</msg>
+<msg timestamp="20210309 09:45:51.978" level="INFO">activate status: 112</msg>
+<status status="PASS" starttime="20210309 09:45:51.975" endtime="20210309 09:45:51.979"></status>
+</kw>
+<kw name="Fota Function Enable Configuration" library="function_fota_enable">
+<doc>获取FOTA功能使能配置字字段配置
+:param enable: True:有效  False:无效
+:return:</doc>
+<arguments>
+<arg>True</arg>
+</arguments>
+<status status="PASS" starttime="20210309 09:45:51.979" endtime="20210309 09:45:51.979"></status>
+</kw>
+<kw name="Vin Validate" library="function_fota_enable">
+<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
+:param enable: True:一致  False:不一致
+:return:</doc>
+<arguments>
+<arg>True</arg>
+</arguments>
+<msg timestamp="20210309 09:45:51.980" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210309 09:45:51.979" endtime="20210309 09:45:51.980"></status>
+</kw>
+<kw name="Hw Teardown" library="hw_function" type="teardown">
+<doc>硬件teardown
+:return:</doc>
+<msg timestamp="20210309 09:45:51.980" level="INFO">deactivate status: 101</msg>
+<msg timestamp="20210309 09:45:51.980" level="INFO">close port: 118</msg>
+<msg timestamp="20210309 09:45:51.981" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210309 09:45:51.980" endtime="20210309 09:45:51.981"></status>
+</kw>
+<status status="FAIL" starttime="20210309 09:45:51.974" endtime="20210309 09:45:51.981" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+</test>
+<test id="s1-t6" name="case006">
+<kw name="Hw Setup" library="hw_function" type="setup">
+<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
+:return:</doc>
+<msg timestamp="20210309 09:45:51.982" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.982" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210309 09:45:51.983" level="INFO">close driver: 0</msg>
+<msg timestamp="20210309 09:45:51.983" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.984" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
+<msg timestamp="20210309 09:45:51.985" level="INFO">open port: 101 c_long(-1)</msg>
+<msg timestamp="20210309 09:45:51.985" level="INFO">set notification: 118</msg>
+<msg timestamp="20210309 09:45:51.985" level="INFO">set bypass: 118</msg>
+<msg timestamp="20210309 09:45:51.985" level="INFO">activate status: 112</msg>
+<msg timestamp="20210309 09:45:51.985" level="INFO">activate status: 112</msg>
+<status status="PASS" starttime="20210309 09:45:51.982" endtime="20210309 09:45:51.986"></status>
+</kw>
+<kw name="Fota Function Enable Configuration" library="function_fota_enable">
+<doc>获取FOTA功能使能配置字字段配置
+:param enable: True:有效  False:无效
+:return:</doc>
+<arguments>
+<arg>False</arg>
+</arguments>
+<status status="PASS" starttime="20210309 09:45:51.986" endtime="20210309 09:45:51.986"></status>
+</kw>
+<kw name="Vin Validate" library="function_fota_enable">
+<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
+:param enable: True:一致  False:不一致
+:return:</doc>
+<arguments>
+<arg>True</arg>
+</arguments>
+<msg timestamp="20210309 09:45:51.987" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210309 09:45:51.986" endtime="20210309 09:45:51.987"></status>
+</kw>
+<kw name="Hw Teardown" library="hw_function" type="teardown">
+<doc>硬件teardown
+:return:</doc>
+<msg timestamp="20210309 09:45:51.987" level="INFO">deactivate status: 101</msg>
+<msg timestamp="20210309 09:45:51.987" level="INFO">close port: 118</msg>
+<msg timestamp="20210309 09:45:51.988" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210309 09:45:51.987" endtime="20210309 09:45:51.988"></status>
+</kw>
+<status status="FAIL" starttime="20210309 09:45:51.981" endtime="20210309 09:45:51.988" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+</test>
+<test id="s1-t7" name="case007">
+<kw name="Hw Setup" library="hw_function" type="setup">
+<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
+:return:</doc>
+<msg timestamp="20210309 09:45:51.989" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.989" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210309 09:45:51.989" level="INFO">close driver: 0</msg>
+<msg timestamp="20210309 09:45:51.989" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.990" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
+<msg timestamp="20210309 09:45:51.991" level="INFO">open port: 101 c_long(-1)</msg>
+<msg timestamp="20210309 09:45:51.992" level="INFO">set notification: 118</msg>
+<msg timestamp="20210309 09:45:51.992" level="INFO">set bypass: 118</msg>
+<msg timestamp="20210309 09:45:51.992" level="INFO">activate status: 112</msg>
+<msg timestamp="20210309 09:45:51.992" level="INFO">activate status: 112</msg>
+<status status="PASS" starttime="20210309 09:45:51.988" endtime="20210309 09:45:51.992"></status>
+</kw>
+<kw name="Fota Function Enable Configuration" library="function_fota_enable">
+<doc>获取FOTA功能使能配置字字段配置
+:param enable: True:有效  False:无效
+:return:</doc>
+<arguments>
+<arg>True</arg>
+</arguments>
+<status status="PASS" starttime="20210309 09:45:51.992" endtime="20210309 09:45:51.992"></status>
+</kw>
+<kw name="Vin Validate" library="function_fota_enable">
+<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
+:param enable: True:一致  False:不一致
+:return:</doc>
+<arguments>
+<arg>False</arg>
+</arguments>
+<msg timestamp="20210309 09:45:51.993" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210309 09:45:51.992" endtime="20210309 09:45:51.994"></status>
+</kw>
+<kw name="Hw Teardown" library="hw_function" type="teardown">
+<doc>硬件teardown
+:return:</doc>
+<msg timestamp="20210309 09:45:51.994" level="INFO">deactivate status: 101</msg>
+<msg timestamp="20210309 09:45:51.994" level="INFO">close port: 118</msg>
+<msg timestamp="20210309 09:45:51.994" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210309 09:45:51.994" endtime="20210309 09:45:51.994"></status>
+</kw>
+<status status="FAIL" starttime="20210309 09:45:51.988" endtime="20210309 09:45:51.994" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+</test>
+<test id="s1-t8" name="case008">
+<kw name="Hw Setup" library="hw_function" type="setup">
+<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
+:return:</doc>
+<msg timestamp="20210309 09:45:51.995" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.996" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210309 09:45:51.996" level="INFO">close driver: 0</msg>
+<msg timestamp="20210309 09:45:51.996" level="INFO">open driver: 0</msg>
+<msg timestamp="20210309 09:45:51.997" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
+<msg timestamp="20210309 09:45:51.998" level="INFO">open port: 101 c_long(-1)</msg>
+<msg timestamp="20210309 09:45:51.998" level="INFO">set notification: 118</msg>
+<msg timestamp="20210309 09:45:51.998" level="INFO">set bypass: 118</msg>
+<msg timestamp="20210309 09:45:51.999" level="INFO">activate status: 112</msg>
+<msg timestamp="20210309 09:45:51.999" level="INFO">activate status: 112</msg>
+<status status="PASS" starttime="20210309 09:45:51.995" endtime="20210309 09:45:51.999"></status>
+</kw>
+<kw name="Fota Function Enable Configuration" library="function_fota_enable">
+<doc>获取FOTA功能使能配置字字段配置
+:param enable: True:有效  False:无效
+:return:</doc>
+<arguments>
+<arg>True</arg>
+</arguments>
+<status status="PASS" starttime="20210309 09:45:51.999" endtime="20210309 09:45:51.999"></status>
+</kw>
+<kw name="Vin Validate" library="function_fota_enable">
+<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
+:param enable: True:一致  False:不一致
+:return:</doc>
+<arguments>
+<arg>True</arg>
+</arguments>
+<msg timestamp="20210309 09:45:52.000" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210309 09:45:51.999" endtime="20210309 09:45:52.000"></status>
+</kw>
+<kw name="Hw Teardown" library="hw_function" type="teardown">
+<doc>硬件teardown
+:return:</doc>
+<msg timestamp="20210309 09:45:52.000" level="INFO">deactivate status: 101</msg>
+<msg timestamp="20210309 09:45:52.001" level="INFO">close port: 118</msg>
+<msg timestamp="20210309 09:45:52.001" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210309 09:45:52.000" endtime="20210309 09:45:52.001"></status>
+</kw>
+<status status="FAIL" starttime="20210309 09:45:51.995" endtime="20210309 09:45:52.001" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+</test>
+<kw name="Stop" library="robot_manager" type="teardown">
+<doc>所有测试用例执行结束之后执行的功能
+:return:</doc>
+<msg timestamp="20210309 09:45:52.001" level="INFO">------stop------</msg>
+<status status="PASS" starttime="20210309 09:45:52.001" endtime="20210309 09:45:52.001"></status>
+</kw>
+<status status="FAIL" starttime="20210309 09:45:49.565" endtime="20210309 09:45:52.001"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="8">Critical Tests</stat>
+<stat pass="0" fail="8">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="8" id="s1" name="Fota Functions">Fota Functions</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

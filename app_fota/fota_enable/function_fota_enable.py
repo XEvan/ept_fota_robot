@@ -2,23 +2,9 @@ import random
 
 from app_fota.hw_handles import XLDriverHandles
 from logger import rfic_info
-
-
-def start():
-    """
-    ①启动数据服务器
-    :return:
-    """
-    print("------start------")
-
-
-def stop():
-    """
-    ①停止数据服务器
-    :return:
-    """
-    print("------stop------")
-
+"""
+    FOTA使能
+"""
 
 def fota_function_enable_configuration(enable=True):
     """
