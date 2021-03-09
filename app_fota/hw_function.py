@@ -1,4 +1,4 @@
-from app_fota.hw_handles import XLDriverHandles
+# from app_fota.hw_handles import XLDriverHandles
 
 """
     硬件的初始化
@@ -22,3 +22,11 @@ def hw_teardown():
     """
     pass
     # XLDriverHandles.xldriver_eth_handle.cleanup()
+
+
+def hello(a=1, b=2):
+    print("a:", a)
+    print("b:", b)
+    if eval(b):
+        print("=======")
+    return True, "123"

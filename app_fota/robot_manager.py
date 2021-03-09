@@ -21,10 +21,34 @@ def stop():
     rfic_info("------stop------")
 
 
+def ota_task_deploy():
+    """
+    部署OTA云端任务
+    :return:
+    """
+    return True
+
+
 def setup():
     rfic_info("------setup------")
+    ota_task_deploy()  # 每条用例之前部署云端任务
 
 
 def teardown():
     rfic_info("------teardown------")
-    Constants.clean() # 重置全局变量
+    Constants.clean()  # 重置全局变量
+
+
+def fota_assert(meas_status, expected_status, msg=""):
+    """
+    对结果做出判定
+    如果"实际结果值"="预期结果值"，则成功，否则失败
+    :param status1: 实际结果值
+    :param status2: 预期结果值
+    :param msg: 错误消息
+    :return:
+    """
+    if str(meas_status) == str(expected_status):
+        assert True, msg
+    else:
+        assert False, msg

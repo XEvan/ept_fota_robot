@@ -1,389 +1,362 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.2.2 (Python 3.7.2 on win32)" generated="20210309 09:45:49.563" rpa="false">
-<suite id="s1" name="Fota Functions" source="D:\02_projects\07_vnxx\framework_robot\fota_functions.robot">
+<robot generator="Robot 3.2.2 (Python 3.7.2 on win32)" generated="20210309 19:52:39.652" rpa="false">
+<suite id="s1" name="Robot Fota Vehicle Data Upload" source="D:\02_projects\07_vnxx\framework_robot\robot_fota_vehicle_data_upload.robot">
 <kw name="Start" library="robot_manager" type="setup">
 <doc>所有测试用例执行之前执行的功能
 :return:</doc>
-<msg timestamp="20210309 09:45:51.940" level="INFO">------start------</msg>
-<status status="PASS" starttime="20210309 09:45:51.940" endtime="20210309 09:45:51.940"></status>
+<msg timestamp="20210309 19:52:39.689" level="INFO">------start------</msg>
+<status status="PASS" starttime="20210309 19:52:39.689" endtime="20210309 19:52:39.689"></status>
 </kw>
-<test id="s1-t1" name="case001">
-<kw name="Hw Setup" library="hw_function" type="setup">
-<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
-:return:</doc>
-<msg timestamp="20210309 09:45:51.946" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.946" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210309 09:45:51.946" level="INFO">close driver: 0</msg>
-<msg timestamp="20210309 09:45:51.947" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.947" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
-<msg timestamp="20210309 09:45:51.949" level="INFO">open port: 101 c_long(-1)</msg>
-<msg timestamp="20210309 09:45:51.949" level="INFO">set notification: 118</msg>
-<msg timestamp="20210309 09:45:51.949" level="INFO">set bypass: 118</msg>
-<msg timestamp="20210309 09:45:51.950" level="INFO">activate status: 112</msg>
-<msg timestamp="20210309 09:45:51.950" level="INFO">activate status: 112</msg>
-<status status="PASS" starttime="20210309 09:45:51.940" endtime="20210309 09:45:51.950"></status>
+<test id="s1-t1" name="case009">
+<kw name="Setup" library="robot_manager" type="setup">
+<msg timestamp="20210309 19:52:39.691" level="INFO">------setup------</msg>
+<status status="PASS" starttime="20210309 19:52:39.691" endtime="20210309 19:52:39.691"></status>
 </kw>
-<kw name="Fota Function Enable Configuration" library="function_fota_enable">
-<doc>获取FOTA功能使能配置字字段配置
-:param enable: True:有效  False:无效
+<kw name="Fota Enable Precondition" library="fota_enable">
+<doc>FOTA使能前提条件
+:param network: 网络是否可访问，默认可访问
+:param conf:  配置字是否可有效，默认有效
+:param vin:  VIN是否一致，默认一致
+:param cert:  身份证书是否已获取，默认已获取
 :return:</doc>
 <arguments>
 <arg>True</arg>
-</arguments>
-<status status="PASS" starttime="20210309 09:45:51.950" endtime="20210309 09:45:51.950"></status>
-</kw>
-<kw name="Vin Validate" library="function_fota_enable">
-<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
-:param enable: True:一致  False:不一致
-:return:</doc>
-<arguments>
+<arg>True</arg>
+<arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210309 09:45:51.953" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210309 09:45:51.950" endtime="20210309 09:45:51.953"></status>
+<status status="PASS" starttime="20210309 19:52:39.691" endtime="20210309 19:52:39.692"></status>
 </kw>
-<kw name="Hw Teardown" library="hw_function" type="teardown">
-<doc>硬件teardown
+<kw name="Sys Pwr Mode" library="fota_enable">
+<doc>设置系统电源模式SysPwrMd
+:param mode: off-&gt;OFF, no_off-&gt;非OFF
 :return:</doc>
-<msg timestamp="20210309 09:45:51.954" level="INFO">deactivate status: 101</msg>
-<msg timestamp="20210309 09:45:51.954" level="INFO">close port: 118</msg>
-<msg timestamp="20210309 09:45:51.954" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210309 09:45:51.953" endtime="20210309 09:45:51.954"></status>
+<arguments>
+<arg>no_off</arg>
+</arguments>
+<status status="PASS" starttime="20210309 19:52:39.692" endtime="20210309 19:52:39.692"></status>
 </kw>
-<status status="FAIL" starttime="20210309 09:45:51.940" endtime="20210309 09:45:51.954" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<kw name="Fota Get Logistics Manifest Req" library="vehicle_data_upload">
+<doc>FOTA_GetLogisticsManifestReq
+车端向云端获取最新物流文件定义(云端解析A2文件内容)
+请求方向：车-&gt;云
+:return:</doc>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20210309 19:52:39.692" level="INFO">等待ICC给OTA后台发送FOTA_GetLogisticsManifestReq。。。</msg>
+<msg timestamp="20210309 19:52:40.692" level="INFO">${status} = (False, '超时[1s]未检测到车端报文：FOTA_GetLogisticsManifestReq')</msg>
+<status status="PASS" starttime="20210309 19:52:39.692" endtime="20210309 19:52:40.692"></status>
+</kw>
+<kw name="Fota Assert" library="robot_manager">
+<doc>对结果做出判定
+如果"实际结果值"="预期结果值"，则成功，否则失败
+:param status1: 实际结果值
+:param status2: 预期结果值
+:param msg: 错误消息
+:return:</doc>
+<arguments>
+<arg>${status}[0]</arg>
+<arg>True</arg>
+<arg>${status}[1]</arg>
+</arguments>
+<msg timestamp="20210309 19:52:40.694" level="FAIL">超时[1s]未检测到车端报文：FOTA_GetLogisticsManifestReq</msg>
+<status status="FAIL" starttime="20210309 19:52:40.692" endtime="20210309 19:52:40.694"></status>
+</kw>
+<kw name="Teardown" library="robot_manager" type="teardown">
+<msg timestamp="20210309 19:52:40.695" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210309 19:52:40.694" endtime="20210309 19:52:40.695"></status>
+</kw>
+<doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件满足</doc>
+<status status="FAIL" starttime="20210309 19:52:39.689" endtime="20210309 19:52:40.695" critical="yes">超时[1s]未检测到车端报文：FOTA_GetLogisticsManifestReq</status>
 </test>
-<test id="s1-t2" name="case002">
-<kw name="Hw Setup" library="hw_function" type="setup">
-<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
-:return:</doc>
-<msg timestamp="20210309 09:45:51.955" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.955" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210309 09:45:51.955" level="INFO">close driver: 0</msg>
-<msg timestamp="20210309 09:45:51.956" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.957" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
-<msg timestamp="20210309 09:45:51.958" level="INFO">open port: 101 c_long(-1)</msg>
-<msg timestamp="20210309 09:45:51.958" level="INFO">set notification: 118</msg>
-<msg timestamp="20210309 09:45:51.958" level="INFO">set bypass: 118</msg>
-<msg timestamp="20210309 09:45:51.958" level="INFO">activate status: 112</msg>
-<msg timestamp="20210309 09:45:51.958" level="INFO">activate status: 112</msg>
-<status status="PASS" starttime="20210309 09:45:51.955" endtime="20210309 09:45:51.958"></status>
+<test id="s1-t2" name="case010">
+<kw name="Setup" library="robot_manager" type="setup">
+<msg timestamp="20210309 19:52:40.701" level="INFO">------setup------</msg>
+<status status="PASS" starttime="20210309 19:52:40.700" endtime="20210309 19:52:40.701"></status>
 </kw>
-<kw name="Fota Function Enable Configuration" library="function_fota_enable">
-<doc>获取FOTA功能使能配置字字段配置
-:param enable: True:有效  False:无效
+<kw name="Fota Enable Precondition" library="fota_enable">
+<doc>FOTA使能前提条件
+:param network: 网络是否可访问，默认可访问
+:param conf:  配置字是否可有效，默认有效
+:param vin:  VIN是否一致，默认一致
+:param cert:  身份证书是否已获取，默认已获取
 :return:</doc>
 <arguments>
 <arg>True</arg>
-</arguments>
-<status status="PASS" starttime="20210309 09:45:51.958" endtime="20210309 09:45:51.959"></status>
-</kw>
-<kw name="Vin Validate" library="function_fota_enable">
-<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
-:param enable: True:一致  False:不一致
-:return:</doc>
-<arguments>
+<arg>True</arg>
+<arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210309 09:45:51.960" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210309 09:45:51.959" endtime="20210309 09:45:51.960"></status>
+<status status="PASS" starttime="20210309 19:52:40.701" endtime="20210309 19:52:40.702"></status>
 </kw>
-<kw name="Hw Teardown" library="hw_function" type="teardown">
-<doc>硬件teardown
+<kw name="Sys Pwr Mode" library="fota_enable">
+<doc>设置系统电源模式SysPwrMd
+:param mode: off-&gt;OFF, no_off-&gt;非OFF
 :return:</doc>
-<msg timestamp="20210309 09:45:51.960" level="INFO">deactivate status: 101</msg>
-<msg timestamp="20210309 09:45:51.961" level="INFO">close port: 118</msg>
-<msg timestamp="20210309 09:45:51.961" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210309 09:45:51.960" endtime="20210309 09:45:51.961"></status>
+<arguments>
+<arg>no_off</arg>
+</arguments>
+<status status="PASS" starttime="20210309 19:52:40.703" endtime="20210309 19:52:40.703"></status>
 </kw>
-<status status="FAIL" starttime="20210309 09:45:51.954" endtime="20210309 09:45:51.961" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
-</test>
-<test id="s1-t3" name="case003">
-<kw name="Hw Setup" library="hw_function" type="setup">
-<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
-:return:</doc>
-<msg timestamp="20210309 09:45:51.962" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.962" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210309 09:45:51.962" level="INFO">close driver: 0</msg>
-<msg timestamp="20210309 09:45:51.963" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.964" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
-<msg timestamp="20210309 09:45:51.965" level="INFO">open port: 101 c_long(-1)</msg>
-<msg timestamp="20210309 09:45:51.965" level="INFO">set notification: 118</msg>
-<msg timestamp="20210309 09:45:51.965" level="INFO">set bypass: 118</msg>
-<msg timestamp="20210309 09:45:51.965" level="INFO">activate status: 112</msg>
-<msg timestamp="20210309 09:45:51.965" level="INFO">activate status: 112</msg>
-<status status="PASS" starttime="20210309 09:45:51.961" endtime="20210309 09:45:51.965"></status>
-</kw>
-<kw name="Fota Function Enable Configuration" library="function_fota_enable">
+<kw name="Fota Function Enable Configuration" library="fota_enable">
 <doc>获取FOTA功能使能配置字字段配置
 :param enable: True:有效  False:无效
 :return:</doc>
 <arguments>
 <arg>False</arg>
 </arguments>
-<status status="PASS" starttime="20210309 09:45:51.966" endtime="20210309 09:45:51.966"></status>
+<status status="PASS" starttime="20210309 19:52:40.703" endtime="20210309 19:52:40.704"></status>
 </kw>
-<kw name="Vin Validate" library="function_fota_enable">
-<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
-:param enable: True:一致  False:不一致
+<kw name="Fota Get Logistics Manifest Req" library="vehicle_data_upload">
+<doc>FOTA_GetLogisticsManifestReq
+车端向云端获取最新物流文件定义(云端解析A2文件内容)
+请求方向：车-&gt;云
+:return:</doc>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20210309 19:52:40.705" level="INFO">等待ICC给OTA后台发送FOTA_GetLogisticsManifestReq。。。</msg>
+<msg timestamp="20210309 19:52:41.706" level="INFO">${status} = (False, '超时[1s]未检测到车端报文：FOTA_GetLogisticsManifestReq')</msg>
+<status status="PASS" starttime="20210309 19:52:40.704" endtime="20210309 19:52:41.706"></status>
+</kw>
+<kw name="Fota Assert" library="robot_manager">
+<doc>对结果做出判定
+如果"实际结果值"="预期结果值"，则成功，否则失败
+:param status1: 实际结果值
+:param status2: 预期结果值
+:param msg: 错误消息
 :return:</doc>
 <arguments>
-<arg>True</arg>
+<arg>${status}[0]</arg>
+<arg>False</arg>
+<arg>${status}[1]</arg>
 </arguments>
-<msg timestamp="20210309 09:45:51.967" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210309 09:45:51.966" endtime="20210309 09:45:51.967"></status>
+<status status="PASS" starttime="20210309 19:52:41.706" endtime="20210309 19:52:41.706"></status>
 </kw>
-<kw name="Hw Teardown" library="hw_function" type="teardown">
-<doc>硬件teardown
-:return:</doc>
-<msg timestamp="20210309 09:45:51.967" level="INFO">deactivate status: 101</msg>
-<msg timestamp="20210309 09:45:51.967" level="INFO">close port: 118</msg>
-<msg timestamp="20210309 09:45:51.968" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210309 09:45:51.967" endtime="20210309 09:45:51.968"></status>
+<kw name="Teardown" library="robot_manager" type="teardown">
+<msg timestamp="20210309 19:52:41.707" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210309 19:52:41.706" endtime="20210309 19:52:41.707"></status>
 </kw>
-<status status="FAIL" starttime="20210309 09:45:51.961" endtime="20210309 09:45:51.968" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - FOTA使能功能未使能</doc>
+<status status="PASS" starttime="20210309 19:52:40.696" endtime="20210309 19:52:41.707" critical="yes"></status>
 </test>
-<test id="s1-t4" name="case004">
-<kw name="Hw Setup" library="hw_function" type="setup">
-<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
-:return:</doc>
-<msg timestamp="20210309 09:45:51.969" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.969" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210309 09:45:51.969" level="INFO">close driver: 0</msg>
-<msg timestamp="20210309 09:45:51.969" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.970" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
-<msg timestamp="20210309 09:45:51.971" level="INFO">open port: 101 c_long(-1)</msg>
-<msg timestamp="20210309 09:45:51.971" level="INFO">set notification: 118</msg>
-<msg timestamp="20210309 09:45:51.971" level="INFO">set bypass: 118</msg>
-<msg timestamp="20210309 09:45:51.972" level="INFO">activate status: 112</msg>
-<msg timestamp="20210309 09:45:51.972" level="INFO">activate status: 112</msg>
-<status status="PASS" starttime="20210309 09:45:51.968" endtime="20210309 09:45:51.972"></status>
+<test id="s1-t3" name="case011">
+<kw name="Setup" library="robot_manager" type="setup">
+<msg timestamp="20210309 19:52:41.709" level="INFO">------setup------</msg>
+<status status="PASS" starttime="20210309 19:52:41.709" endtime="20210309 19:52:41.709"></status>
 </kw>
-<kw name="Fota Function Enable Configuration" library="function_fota_enable">
-<doc>获取FOTA功能使能配置字字段配置
-:param enable: True:有效  False:无效
+<kw name="Fota Enable Precondition" library="fota_enable">
+<doc>FOTA使能前提条件
+:param network: 网络是否可访问，默认可访问
+:param conf:  配置字是否可有效，默认有效
+:param vin:  VIN是否一致，默认一致
+:param cert:  身份证书是否已获取，默认已获取
 :return:</doc>
 <arguments>
 <arg>True</arg>
+<arg>True</arg>
+<arg>True</arg>
+<arg>True</arg>
 </arguments>
-<status status="PASS" starttime="20210309 09:45:51.972" endtime="20210309 09:45:51.972"></status>
+<status status="PASS" starttime="20210309 19:52:41.709" endtime="20210309 19:52:41.709"></status>
 </kw>
-<kw name="Vin Validate" library="function_fota_enable">
-<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
-:param enable: True:一致  False:不一致
+<kw name="Sys Pwr Mode" library="fota_enable">
+<doc>设置系统电源模式SysPwrMd
+:param mode: off-&gt;OFF, no_off-&gt;非OFF
 :return:</doc>
+<arguments>
+<arg>off</arg>
+</arguments>
+<status status="PASS" starttime="20210309 19:52:41.709" endtime="20210309 19:52:41.709"></status>
+</kw>
+<kw name="Fota Get Logistics Manifest Req" library="vehicle_data_upload">
+<doc>FOTA_GetLogisticsManifestReq
+车端向云端获取最新物流文件定义(云端解析A2文件内容)
+请求方向：车-&gt;云
+:return:</doc>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20210309 19:52:41.710" level="INFO">等待ICC给OTA后台发送FOTA_GetLogisticsManifestReq。。。</msg>
+<msg timestamp="20210309 19:52:42.710" level="INFO">${status} = (False, '超时[1s]未检测到车端报文：FOTA_GetLogisticsManifestReq')</msg>
+<status status="PASS" starttime="20210309 19:52:41.710" endtime="20210309 19:52:42.710"></status>
+</kw>
+<kw name="Fota Assert" library="robot_manager">
+<doc>对结果做出判定
+如果"实际结果值"="预期结果值"，则成功，否则失败
+:param status1: 实际结果值
+:param status2: 预期结果值
+:param msg: 错误消息
+:return:</doc>
+<arguments>
+<arg>${status}[0]</arg>
+<arg>False</arg>
+<arg>${status}[1]</arg>
+</arguments>
+<status status="PASS" starttime="20210309 19:52:42.711" endtime="20210309 19:52:42.711"></status>
+</kw>
+<kw name="Teardown" library="robot_manager" type="teardown">
+<msg timestamp="20210309 19:52:42.720" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210309 19:52:42.711" endtime="20210309 19:52:42.720"></status>
+</kw>
+<doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 设置系统电源模式为OFF</doc>
+<status status="PASS" starttime="20210309 19:52:41.707" endtime="20210309 19:52:42.720" critical="yes"></status>
+</test>
+<test id="s1-t4" name="case012">
+<kw name="Setup" library="robot_manager" type="setup">
+<msg timestamp="20210309 19:52:42.723" level="INFO">------setup------</msg>
+<status status="PASS" starttime="20210309 19:52:42.722" endtime="20210309 19:52:42.723"></status>
+</kw>
+<kw name="Fota Enable Precondition" library="fota_enable">
+<doc>FOTA使能前提条件
+:param network: 网络是否可访问，默认可访问
+:param conf:  配置字是否可有效，默认有效
+:param vin:  VIN是否一致，默认一致
+:param cert:  身份证书是否已获取，默认已获取
+:return:</doc>
+<arguments>
+<arg>True</arg>
+<arg>True</arg>
+<arg>True</arg>
+<arg>True</arg>
+</arguments>
+<status status="PASS" starttime="20210309 19:52:42.723" endtime="20210309 19:52:42.723"></status>
+</kw>
+<kw name="Sys Pwr Mode" library="fota_enable">
+<doc>设置系统电源模式SysPwrMd
+:param mode: off-&gt;OFF, no_off-&gt;非OFF
+:return:</doc>
+<arguments>
+<arg>no_off</arg>
+</arguments>
+<status status="PASS" starttime="20210309 19:52:42.723" endtime="20210309 19:52:42.723"></status>
+</kw>
+<kw name="Network Access" library="fota_enable">
 <arguments>
 <arg>False</arg>
 </arguments>
-<msg timestamp="20210309 09:45:51.973" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210309 09:45:51.972" endtime="20210309 09:45:51.973"></status>
+<status status="PASS" starttime="20210309 19:52:42.723" endtime="20210309 19:52:42.724"></status>
 </kw>
-<kw name="Hw Teardown" library="hw_function" type="teardown">
-<doc>硬件teardown
+<kw name="Fota Get Logistics Manifest Req" library="vehicle_data_upload">
+<doc>FOTA_GetLogisticsManifestReq
+车端向云端获取最新物流文件定义(云端解析A2文件内容)
+请求方向：车-&gt;云
 :return:</doc>
-<msg timestamp="20210309 09:45:51.974" level="INFO">deactivate status: 101</msg>
-<msg timestamp="20210309 09:45:51.974" level="INFO">close port: 118</msg>
-<msg timestamp="20210309 09:45:51.974" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210309 09:45:51.974" endtime="20210309 09:45:51.974"></status>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20210309 19:52:42.724" level="INFO">等待ICC给OTA后台发送FOTA_GetLogisticsManifestReq。。。</msg>
+<msg timestamp="20210309 19:52:43.724" level="INFO">${status} = (False, '超时[1s]未检测到车端报文：FOTA_GetLogisticsManifestReq')</msg>
+<status status="PASS" starttime="20210309 19:52:42.724" endtime="20210309 19:52:43.724"></status>
 </kw>
-<status status="FAIL" starttime="20210309 09:45:51.968" endtime="20210309 09:45:51.974" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<kw name="Fota Assert" library="robot_manager">
+<doc>对结果做出判定
+如果"实际结果值"="预期结果值"，则成功，否则失败
+:param status1: 实际结果值
+:param status2: 预期结果值
+:param msg: 错误消息
+:return:</doc>
+<arguments>
+<arg>${status}[0]</arg>
+<arg>False</arg>
+<arg>${status}[1]</arg>
+</arguments>
+<status status="PASS" starttime="20210309 19:52:43.724" endtime="20210309 19:52:43.724"></status>
+</kw>
+<kw name="Teardown" library="robot_manager" type="teardown">
+<msg timestamp="20210309 19:52:43.725" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210309 19:52:43.724" endtime="20210309 19:52:43.725"></status>
+</kw>
+<doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 设置外网不可访问</doc>
+<status status="PASS" starttime="20210309 19:52:42.721" endtime="20210309 19:52:43.725" critical="yes"></status>
 </test>
-<test id="s1-t5" name="case005">
-<kw name="Hw Setup" library="hw_function" type="setup">
-<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
-:return:</doc>
-<msg timestamp="20210309 09:45:51.975" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.975" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210309 09:45:51.976" level="INFO">close driver: 0</msg>
-<msg timestamp="20210309 09:45:51.976" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.977" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
-<msg timestamp="20210309 09:45:51.978" level="INFO">open port: 101 c_long(-1)</msg>
-<msg timestamp="20210309 09:45:51.978" level="INFO">set notification: 118</msg>
-<msg timestamp="20210309 09:45:51.978" level="INFO">set bypass: 118</msg>
-<msg timestamp="20210309 09:45:51.978" level="INFO">activate status: 112</msg>
-<msg timestamp="20210309 09:45:51.978" level="INFO">activate status: 112</msg>
-<status status="PASS" starttime="20210309 09:45:51.975" endtime="20210309 09:45:51.979"></status>
+<test id="s1-t5" name="case013">
+<kw name="Setup" library="robot_manager" type="setup">
+<msg timestamp="20210309 19:52:43.727" level="INFO">------setup------</msg>
+<status status="PASS" starttime="20210309 19:52:43.726" endtime="20210309 19:52:43.727"></status>
 </kw>
-<kw name="Fota Function Enable Configuration" library="function_fota_enable">
-<doc>获取FOTA功能使能配置字字段配置
-:param enable: True:有效  False:无效
+<kw name="Fota Enable Precondition" library="fota_enable">
+<doc>FOTA使能前提条件
+:param network: 网络是否可访问，默认可访问
+:param conf:  配置字是否可有效，默认有效
+:param vin:  VIN是否一致，默认一致
+:param cert:  身份证书是否已获取，默认已获取
 :return:</doc>
 <arguments>
 <arg>True</arg>
-</arguments>
-<status status="PASS" starttime="20210309 09:45:51.979" endtime="20210309 09:45:51.979"></status>
-</kw>
-<kw name="Vin Validate" library="function_fota_enable">
-<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
-:param enable: True:一致  False:不一致
-:return:</doc>
-<arguments>
+<arg>True</arg>
+<arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210309 09:45:51.980" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210309 09:45:51.979" endtime="20210309 09:45:51.980"></status>
+<status status="PASS" starttime="20210309 19:52:43.727" endtime="20210309 19:52:43.727"></status>
 </kw>
-<kw name="Hw Teardown" library="hw_function" type="teardown">
-<doc>硬件teardown
+<kw name="Sys Pwr Mode" library="fota_enable">
+<doc>设置系统电源模式SysPwrMd
+:param mode: off-&gt;OFF, no_off-&gt;非OFF
 :return:</doc>
-<msg timestamp="20210309 09:45:51.980" level="INFO">deactivate status: 101</msg>
-<msg timestamp="20210309 09:45:51.980" level="INFO">close port: 118</msg>
-<msg timestamp="20210309 09:45:51.981" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210309 09:45:51.980" endtime="20210309 09:45:51.981"></status>
+<arguments>
+<arg>no_off</arg>
+</arguments>
+<status status="PASS" starttime="20210309 19:52:43.727" endtime="20210309 19:52:43.727"></status>
 </kw>
-<status status="FAIL" starttime="20210309 09:45:51.974" endtime="20210309 09:45:51.981" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
-</test>
-<test id="s1-t6" name="case006">
-<kw name="Hw Setup" library="hw_function" type="setup">
-<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
-:return:</doc>
-<msg timestamp="20210309 09:45:51.982" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.982" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210309 09:45:51.983" level="INFO">close driver: 0</msg>
-<msg timestamp="20210309 09:45:51.983" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.984" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
-<msg timestamp="20210309 09:45:51.985" level="INFO">open port: 101 c_long(-1)</msg>
-<msg timestamp="20210309 09:45:51.985" level="INFO">set notification: 118</msg>
-<msg timestamp="20210309 09:45:51.985" level="INFO">set bypass: 118</msg>
-<msg timestamp="20210309 09:45:51.985" level="INFO">activate status: 112</msg>
-<msg timestamp="20210309 09:45:51.985" level="INFO">activate status: 112</msg>
-<status status="PASS" starttime="20210309 09:45:51.982" endtime="20210309 09:45:51.986"></status>
-</kw>
-<kw name="Fota Function Enable Configuration" library="function_fota_enable">
-<doc>获取FOTA功能使能配置字字段配置
-:param enable: True:有效  False:无效
-:return:</doc>
+<kw name="Network Access" library="fota_enable">
 <arguments>
 <arg>False</arg>
 </arguments>
-<status status="PASS" starttime="20210309 09:45:51.986" endtime="20210309 09:45:51.986"></status>
+<status status="PASS" starttime="20210309 19:52:43.727" endtime="20210309 19:52:43.727"></status>
 </kw>
-<kw name="Vin Validate" library="function_fota_enable">
-<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
-:param enable: True:一致  False:不一致
+<kw name="Fota Get Logistics Manifest Req" library="vehicle_data_upload">
+<doc>FOTA_GetLogisticsManifestReq
+车端向云端获取最新物流文件定义(云端解析A2文件内容)
+请求方向：车-&gt;云
+:return:</doc>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20210309 19:52:43.728" level="INFO">等待ICC给OTA后台发送FOTA_GetLogisticsManifestReq。。。</msg>
+<msg timestamp="20210309 19:52:44.729" level="INFO">${status} = (False, '超时[1s]未检测到车端报文：FOTA_GetLogisticsManifestReq')</msg>
+<status status="PASS" starttime="20210309 19:52:43.728" endtime="20210309 19:52:44.729"></status>
+</kw>
+<kw name="Fota Assert" library="robot_manager">
+<doc>对结果做出判定
+如果"实际结果值"="预期结果值"，则成功，否则失败
+:param status1: 实际结果值
+:param status2: 预期结果值
+:param msg: 错误消息
 :return:</doc>
 <arguments>
-<arg>True</arg>
-</arguments>
-<msg timestamp="20210309 09:45:51.987" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210309 09:45:51.986" endtime="20210309 09:45:51.987"></status>
-</kw>
-<kw name="Hw Teardown" library="hw_function" type="teardown">
-<doc>硬件teardown
-:return:</doc>
-<msg timestamp="20210309 09:45:51.987" level="INFO">deactivate status: 101</msg>
-<msg timestamp="20210309 09:45:51.987" level="INFO">close port: 118</msg>
-<msg timestamp="20210309 09:45:51.988" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210309 09:45:51.987" endtime="20210309 09:45:51.988"></status>
-</kw>
-<status status="FAIL" starttime="20210309 09:45:51.981" endtime="20210309 09:45:51.988" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
-</test>
-<test id="s1-t7" name="case007">
-<kw name="Hw Setup" library="hw_function" type="setup">
-<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
-:return:</doc>
-<msg timestamp="20210309 09:45:51.989" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.989" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210309 09:45:51.989" level="INFO">close driver: 0</msg>
-<msg timestamp="20210309 09:45:51.989" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.990" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
-<msg timestamp="20210309 09:45:51.991" level="INFO">open port: 101 c_long(-1)</msg>
-<msg timestamp="20210309 09:45:51.992" level="INFO">set notification: 118</msg>
-<msg timestamp="20210309 09:45:51.992" level="INFO">set bypass: 118</msg>
-<msg timestamp="20210309 09:45:51.992" level="INFO">activate status: 112</msg>
-<msg timestamp="20210309 09:45:51.992" level="INFO">activate status: 112</msg>
-<status status="PASS" starttime="20210309 09:45:51.988" endtime="20210309 09:45:51.992"></status>
-</kw>
-<kw name="Fota Function Enable Configuration" library="function_fota_enable">
-<doc>获取FOTA功能使能配置字字段配置
-:param enable: True:有效  False:无效
-:return:</doc>
-<arguments>
-<arg>True</arg>
-</arguments>
-<status status="PASS" starttime="20210309 09:45:51.992" endtime="20210309 09:45:51.992"></status>
-</kw>
-<kw name="Vin Validate" library="function_fota_enable">
-<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
-:param enable: True:一致  False:不一致
-:return:</doc>
-<arguments>
+<arg>${status}[0]</arg>
 <arg>False</arg>
+<arg>${status}[1]</arg>
 </arguments>
-<msg timestamp="20210309 09:45:51.993" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210309 09:45:51.992" endtime="20210309 09:45:51.994"></status>
+<status status="PASS" starttime="20210309 19:52:44.729" endtime="20210309 19:52:44.730"></status>
 </kw>
-<kw name="Hw Teardown" library="hw_function" type="teardown">
-<doc>硬件teardown
-:return:</doc>
-<msg timestamp="20210309 09:45:51.994" level="INFO">deactivate status: 101</msg>
-<msg timestamp="20210309 09:45:51.994" level="INFO">close port: 118</msg>
-<msg timestamp="20210309 09:45:51.994" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210309 09:45:51.994" endtime="20210309 09:45:51.994"></status>
+<kw name="Teardown" library="robot_manager" type="teardown">
+<msg timestamp="20210309 19:52:44.730" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210309 19:52:44.730" endtime="20210309 19:52:44.730"></status>
 </kw>
-<status status="FAIL" starttime="20210309 09:45:51.988" endtime="20210309 09:45:51.994" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
-</test>
-<test id="s1-t8" name="case008">
-<kw name="Hw Setup" library="hw_function" type="setup">
-<doc>硬件初始化，VN5640对CAN、ETH的配置（包括连接）
-:return:</doc>
-<msg timestamp="20210309 09:45:51.995" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.996" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210309 09:45:51.996" level="INFO">close driver: 0</msg>
-<msg timestamp="20210309 09:45:51.996" level="INFO">open driver: 0</msg>
-<msg timestamp="20210309 09:45:51.997" level="INFO">xlSetApplConfig: [0, 0, 0, 0, 0, 0, 0, 0]</msg>
-<msg timestamp="20210309 09:45:51.998" level="INFO">open port: 101 c_long(-1)</msg>
-<msg timestamp="20210309 09:45:51.998" level="INFO">set notification: 118</msg>
-<msg timestamp="20210309 09:45:51.998" level="INFO">set bypass: 118</msg>
-<msg timestamp="20210309 09:45:51.999" level="INFO">activate status: 112</msg>
-<msg timestamp="20210309 09:45:51.999" level="INFO">activate status: 112</msg>
-<status status="PASS" starttime="20210309 09:45:51.995" endtime="20210309 09:45:51.999"></status>
-</kw>
-<kw name="Fota Function Enable Configuration" library="function_fota_enable">
-<doc>获取FOTA功能使能配置字字段配置
-:param enable: True:有效  False:无效
-:return:</doc>
-<arguments>
-<arg>True</arg>
-</arguments>
-<status status="PASS" starttime="20210309 09:45:51.999" endtime="20210309 09:45:51.999"></status>
-</kw>
-<kw name="Vin Validate" library="function_fota_enable">
-<doc>ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
-:param enable: True:一致  False:不一致
-:return:</doc>
-<arguments>
-<arg>True</arg>
-</arguments>
-<msg timestamp="20210309 09:45:52.000" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210309 09:45:51.999" endtime="20210309 09:45:52.000"></status>
-</kw>
-<kw name="Hw Teardown" library="hw_function" type="teardown">
-<doc>硬件teardown
-:return:</doc>
-<msg timestamp="20210309 09:45:52.000" level="INFO">deactivate status: 101</msg>
-<msg timestamp="20210309 09:45:52.001" level="INFO">close port: 118</msg>
-<msg timestamp="20210309 09:45:52.001" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210309 09:45:52.000" endtime="20210309 09:45:52.001"></status>
-</kw>
-<status status="FAIL" starttime="20210309 09:45:51.995" endtime="20210309 09:45:52.001" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 设置外网不可访问</doc>
+<status status="PASS" starttime="20210309 19:52:43.725" endtime="20210309 19:52:44.730" critical="yes"></status>
 </test>
 <kw name="Stop" library="robot_manager" type="teardown">
 <doc>所有测试用例执行结束之后执行的功能
 :return:</doc>
-<msg timestamp="20210309 09:45:52.001" level="INFO">------stop------</msg>
-<status status="PASS" starttime="20210309 09:45:52.001" endtime="20210309 09:45:52.001"></status>
+<msg timestamp="20210309 19:52:44.732" level="INFO">------stop------</msg>
+<status status="PASS" starttime="20210309 19:52:44.731" endtime="20210309 19:52:44.732"></status>
 </kw>
-<status status="FAIL" starttime="20210309 09:45:49.565" endtime="20210309 09:45:52.001"></status>
+<doc>FOTA车辆数据上传测试用例</doc>
+<status status="FAIL" starttime="20210309 19:52:39.654" endtime="20210309 19:52:44.732"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="8">Critical Tests</stat>
-<stat pass="0" fail="8">All Tests</stat>
+<stat pass="4" fail="1">Critical Tests</stat>
+<stat pass="4" fail="1">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="0" fail="8" id="s1" name="Fota Functions">Fota Functions</stat>
+<stat pass="4" fail="1" id="s1" name="Robot Fota Vehicle Data Upload">Robot Fota Vehicle Data Upload</stat>
 </suite>
 </statistics>
 <errors>

@@ -1,10 +1,10 @@
-import random
-
-from app_fota.hw_handles import XLDriverHandles
-
 """
     FOTA使能
 """
+
+
+def network_access(enable=True):
+    return True
 
 
 def fota_function_enable_configuration(enable=True):
@@ -13,7 +13,6 @@ def fota_function_enable_configuration(enable=True):
     :param enable: True:有效  False:无效
     :return:
     """
-    id = 0xC910
     return True
 
 
@@ -25,7 +24,6 @@ def vin_validate(status=True):
     """
     # ICC的VIN码：F190
     # 车辆VIN不匹配(BCM&ICC)：D500
-    id = 0x500
     return True
 
 
@@ -35,7 +33,6 @@ def security_vehicle_identification_certificate_status(status=True):
     :param enable: True:已获取  False:为获取
     :return:
     """
-    id = 0xACC1
     return True
 
 
@@ -46,3 +43,18 @@ def sys_pwr_mode(mode="off"):
     :return:
     """
     return True
+
+
+def fota_enable_precondition(network=True, conf=True, vin=True, cert=True):
+    """
+    FOTA使能前提条件
+    :param network: 网络是否可访问，默认可访问
+    :param conf:  配置字是否可有效，默认有效
+    :param vin:  VIN是否一致，默认一致
+    :param cert:  身份证书是否已获取，默认已获取
+    :return:
+    """
+    network_access(eval(str(network)))  # 外网是否可访问
+    fota_function_enable_configuration(eval(str(conf)))  # 配置字是否有效
+    vin_validate(eval(str(vin)))  # VIN是否一致
+    security_vehicle_identification_certificate_status(eval(str(cert)))  # 身份证书是否已获取

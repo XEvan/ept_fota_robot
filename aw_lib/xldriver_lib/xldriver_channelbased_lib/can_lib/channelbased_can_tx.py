@@ -1,4 +1,3 @@
-import random
 import time
 from ctypes import byref, c_uint
 

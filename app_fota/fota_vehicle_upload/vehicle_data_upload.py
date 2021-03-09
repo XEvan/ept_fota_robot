@@ -40,11 +40,11 @@ def fota_triggersession(expected_trigger_type="GetLogistics", timeout=1):
                 request_id = requestInfo.get("requestId", None)
                 Constants.request_id = request_id
                 rfic_info("检测到云端报文：FOTA_TriggerSession, requestId=[%s]" % str(request_id))
-                return True
+                return True, ""
             else:
-                assert False, "检测到云端报文：FOTA_TriggerSession，[解析的type][%s]!=[期望的type][%s]" % (
+                return False, "检测到云端报文：FOTA_TriggerSession，[解析的type][%s]!=[期望的type][%s]" % (
                     str(trigger_type), str(expected_trigger_type))
-    assert False, "超时[%ss]未检测到云端报文：FOTA_TriggerSession" % str(timeout)
+    return False, "超时[%ss]未检测到云端报文：FOTA_TriggerSession" % str(timeout)
 
 
 def fota_get_logistics_manifest_req(timeout=1):
@@ -74,13 +74,13 @@ def fota_get_logistics_manifest_req(timeout=1):
             #   报文中有requestId, Constants.request_id为None
             if Constants.request_id is None:
                 # 车端触发,Constants.request_id=None,无需比对
-                return True
+                return True, ""
             else:
                 # 云端触发,Constants.request_id来自于FOTA_TriggerSession,两者正常情况下一致
                 request_id = requestInfo.get("requestId")
                 condition2 = request_id == Constants.request_id
-                return condition2
-    assert False, "超时[%ss]未检测到车端报文：FOTA_GetLogisticsManifestReq" % str(timeout)
+                return condition2, ""
+    return False, "超时[%ss]未检测到车端报文：FOTA_GetLogisticsManifestReq" % str(timeout)
 
 
 def fota_get_logistics_manifest_resp(timeout=1):
@@ -104,8 +104,8 @@ def fota_get_logistics_manifest_resp(timeout=1):
         condition1 = requestInfo.get("requestMethod") == "FOTA_GetLogisticsManifestResp"
         # 检测到报文
         if condition1:
-            return True
-    assert False, "超时[%ss]未检测到云端报文：FOTA_GetLogisticsManifestResp" % str(timeout)
+            return True, ""
+    return False, "超时[%ss]未检测到云端报文：FOTA_GetLogisticsManifestResp" % str(timeout)
 
 
 def fota_check_version_req(timeout=1):
@@ -129,8 +129,8 @@ def fota_check_version_req(timeout=1):
         condition1 = requestInfo.get("requestMethod") == "FOTA_CheckVersionReq"
         # 检测到报文
         if condition1:
-            return True
-    assert False, "超时[%ss]未检测到车端报文：FOTA_CheckVersionReq" % str(timeout)
+            return True, ""
+    return False, "超时[%ss]未检测到车端报文：FOTA_CheckVersionReq" % str(timeout)
 
 
 def fota_check_version_resp(timeout=1):
@@ -154,5 +154,28 @@ def fota_check_version_resp(timeout=1):
         condition1 = requestInfo.get("requestMethod") == "FOTA_CheckVersionResp"
         # 检测到报文
         if condition1:
-            return True
-    assert False, "超时[%ss]未检测到云端报文：FOTA_CheckVersionResp" % str(timeout)
+            return True, ""
+    return False, "超时[%ss]未检测到云端报文：FOTA_CheckVersionResp" % str(timeout)
+
+
+def disconnect_ecu(src_ecu_name="IAM", dst_ecu_nam="ICC"):
+    """
+    断开指定ECU
+    :param src_ecu_name: 源ECU
+    :param dst_ecu_name: 目的ECU
+    :return:
+    """
+    return True
+
+
+def simulation_message(src_ecu_name="IAM", dst_ecu_name="ICC", message_type="error_mnf_info"):
+    """
+    仿真报文
+    :param src_ecu_name: 源ECU
+    :param dst_ecu_name: 目的ECU
+    :param message_type: 内置消息类型，根据消息类型去执行不同的逻辑
+    :return:
+    """
+    if message_type == "error_mnf_info":
+        return True, ""
+    return False, "Error"
