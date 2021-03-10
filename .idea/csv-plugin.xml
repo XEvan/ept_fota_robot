@@ -3,7 +3,21 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="D:\01_software\python37\Lib\site-packages\can\message.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\app_fota\fota_enable\fota_enable.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\app_fota\fota_log_upload\fota_log_upload.py">
           <value>
             <Attribute>
               <option name="separator" value=":" />
@@ -81,6 +95,13 @@
           </value>
         </entry>
         <entry key="\robot_fota_enable.robot">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\robot_fota_log_upload.robot">
           <value>
             <Attribute>
               <option name="separator" value="&#9;" />

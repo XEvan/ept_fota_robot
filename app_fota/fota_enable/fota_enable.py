@@ -45,11 +45,23 @@ def vin_validate(status=True):
 
 def security_vehicle_identification_certificate_status(status=True):
     """
-    车辆身份证书获取状态
+    设置车辆身份证书未获取：
+        CANID：0x710
+        DATA：04 2E B9 33 00
+    设置车辆身份证书获取：
+        CANID：0x710
+        DATA：04 2E B9 33 01
     :param enable: True:已获取  False:为获取
     :return:
     """
     status = eval(str(status))
+
+    can_id = 0x710
+    if status:
+        data = [0x04, 0x2E, 0xB9, 0x33, 0x01]
+    else:
+        data = [0x04, 0x2E, 0xC9, 0x10, 0x00]
+    AwManager.xldriver_channelbased_can_manager.can_send_in_single(can_id, data, expected_can_id=0x718)
     return True
 
 
