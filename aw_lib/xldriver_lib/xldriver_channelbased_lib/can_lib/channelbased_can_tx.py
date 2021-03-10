@@ -16,6 +16,7 @@ class ChannelBasedCanTx(ChannelBased):
         super(ChannelBasedCanTx, self).__init__()
 
         self.validate_status = False  # 是否需要等待响应报文，False为不需要或者已经得到响应
+        self.expected_can_id = 0x00  # 期望收到的can信号的id
         self.response = None
 
     # @Deprecated
@@ -48,11 +49,11 @@ class ChannelBasedCanTx(ChannelBased):
         :param msg:
         :return:
         """
-        print(msg)
-        self.validate_status = False  # 检测到期望报文
-        self.response = msg
+        if msg.arbitration_id == self.expected_can_id:
+            self.validate_status = False  # 检测到期望报文
+            self.response = msg
 
-    def can_send_in_single(self, id, data, wait_ret=True, timeout=30):
+    def can_send_in_single(self, id, data, wait_ret=True, expected_can_id=0x00, timeout=30):
         """
         单帧
         :param id: 发送的id
@@ -61,6 +62,7 @@ class ChannelBasedCanTx(ChannelBased):
         :return: 响应报文
         """
         self.validate_status = wait_ret  # 默认需要等待响应报文
+        self.expected_can_id = expected_can_id  # 期望收到的CAN信号的id
         # 获取配置文件中的配置信息  -s
         canAppName = str(self.canAppName.value, encoding="utf-8")  # CAN Application的name
         channels = []  # 配置文件中的CAN相关的AppChannel

@@ -2,6 +2,7 @@
     测试用例执行前后
 """
 from app_fota.constants import Constants
+from aw_lib.aw_manager import AwManager
 from logger import rfic_info
 
 
@@ -31,6 +32,7 @@ def ota_task_deploy():
 
 def setup():
     rfic_info("------setup------")
+    AwManager.xldriver_channelbased_can_manager.reset()
     ota_task_deploy()  # 每条用例之前部署云端任务
 
 

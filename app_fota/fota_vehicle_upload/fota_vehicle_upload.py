@@ -88,7 +88,7 @@ def fota_get_logistics_manifest_resp(timeout=1):
     FOTA_GetLogisticsManifestResp
     车端向云端获取最新物流文件定义(云端解析A2文件内容)
     请求方向：云->车
-    :return:
+    :return: 成功则返回解析好的字段
     """
     rfic_info("等待OTA后台发送FOTA_GetLogisticsManifestResp。。。")
 
@@ -138,7 +138,7 @@ def fota_check_version_resp(timeout=1):
     FOTA_CheckVersionResp
     云端反馈物流数据上报后处理结果，如果有升级任务，则同时下发
     请求方向：云->车
-    :return:
+    :return: 返回解析的结果
     """
     rfic_info("等待OTA后台发送FOTA_CheckVersionResp。。。")
 
@@ -156,6 +156,30 @@ def fota_check_version_resp(timeout=1):
         if condition1:
             return True, ""
     return False, "超时[%ss]未检测到云端报文：FOTA_CheckVersionResp" % str(timeout)
+
+
+def check_version_resp_update_mode_judge(meas_val, exp_val):
+    """
+    对FOTA_CheckVersionResp消息中的fotaTaskInfo.updMode与期望值进行判断
+    传进来的值是字符串形式，需要转换
+    :param meas_val:
+    :param exp_val:
+    :return:
+    """
+    if meas_val == exp_val:
+        assert True, ""
+    else:
+        assert False, "update mode not match[meas=%s][expected=%s]" % (str(meas_val), str(exp_val))
+
+
+def firewall_certificate_config(status=True):
+    """
+    配置防火墙认证状态
+    :param status: True则成功，False则失败
+    :return:
+    """
+    status = eval(str(status))
+    return True
 
 
 def disconnect_ecu(src_ecu_name="IAM", dst_ecu_nam="ICC"):

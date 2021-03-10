@@ -1,6 +1,7 @@
 """
     FOTA使能
 """
+from aw_lib.aw_manager import AwManager
 
 
 def network_access(enable=True):
@@ -10,9 +11,23 @@ def network_access(enable=True):
 def fota_function_enable_configuration(enable=True):
     """
     获取FOTA功能使能配置字字段配置
+    CANID：0x710
+    dlc设置为5
+    DATA：04 2E C9 10 C0
+    最后一个字节：
+        C0:有效
+        40:无效
     :param enable: True:有效  False:无效
     :return:
     """
+    enable = eval(str(enable))
+
+    can_id = 0x710
+    if enable:
+        data = [0x04, 0x2E, 0xC9, 0x10, 0xC0]
+    else:
+        data = [0x04, 0x2E, 0xC9, 0x10, 0x40]
+    AwManager.xldriver_channelbased_can_manager.can_send_in_single(can_id, data, expected_can_id=0x718)
     return True
 
 
@@ -22,6 +37,7 @@ def vin_validate(status=True):
     :param enable: True:一致  False:不一致
     :return:
     """
+    status = eval(str(status))
     # ICC的VIN码：F190
     # 车辆VIN不匹配(BCM&ICC)：D500
     return True
@@ -33,6 +49,7 @@ def security_vehicle_identification_certificate_status(status=True):
     :param enable: True:已获取  False:为获取
     :return:
     """
+    status = eval(str(status))
     return True
 
 

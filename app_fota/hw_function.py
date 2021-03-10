@@ -25,8 +25,6 @@ def hw_teardown():
 
 
 def hello(a=1, b=2):
-    print("a:", a)
-    print("b:", b)
-    if eval(b):
-        print("=======")
+
+    print(a==b)
     return True, "123"

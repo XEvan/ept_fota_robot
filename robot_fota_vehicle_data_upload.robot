@@ -69,6 +69,68 @@ case015
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_get_logistics_manifest_resp
     fota_assert     ${status}[0]    True    ${status}[1]
+    # 解析${status}[1]中的ecuNum？
+
+case016
+	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置ICC防火墙认证失败
+	fota_enable_precondition    True    True   True    True
+    sys_pwr_mode    no_off
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_get_logistics_manifest_resp
+    fota_assert     ${status}[0]    True    ${status}[1]
+    firewall_certificate_config     False
+    ${status}   fota_check_version_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    # 解析${status}[1]中的ecuNum=0,LogisticsDatainfo=None？
+
+case017
+	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置字无效
+	fota_enable_precondition    True    True   True    True
+    sys_pwr_mode    no_off
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_get_logistics_manifest_resp
+    fota_assert     ${status}[0]    True    ${status}[1]
+    fota_function_enable_configuration     False
+    ${status}   fota_check_version_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    # 解析${status}[1]中的ecuNum=0,LogisticsDatainfo=None？
+
+case018
+	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置VIN不一致
+	fota_enable_precondition    True    True   True    True
+    sys_pwr_mode    no_off
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_get_logistics_manifest_resp
+    fota_assert     ${status}[0]    True    ${status}[1]
+    vin_validate     False
+    ${status}   fota_check_version_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    # 解析${status}[1]中的ecuNum=0,LogisticsDatainfo=None？
+
+case019
+	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置身份证书状态无效
+	fota_enable_precondition    True    True   True    True
+    sys_pwr_mode    no_off
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_get_logistics_manifest_resp
+    fota_assert     ${status}[0]    True    ${status}[1]
+    security_vehicle_identification_certificate_status     False
+    ${status}   fota_check_version_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    # 解析${status}[1]中的ecuNum=0,LogisticsDatainfo=None？
+
+case032
+	[Documentation]  使能条件都满足 - 车端自动触发 - 物流数据的上传 - 物流数据上传成功
+	fota_enable_precondition    True    True   True    True
+    sys_pwr_mode    no_off
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_get_logistics_manifest_resp
+    fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_check_version_req
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_check_version_resp
