@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.2.2 (Python 3.7.2 on win32)" generated="20210310 11:35:21.670" rpa="false">
+<robot generator="Robot 3.2.2 (Python 3.7.2 on win32)" generated="20210311 11:05:30.781" rpa="false">
 <suite id="s1" name="Robot Fota Vehicle Data Upload" source="D:\02_projects\07_vnxx\framework_robot\robot_fota_vehicle_data_upload.robot">
 <kw name="Start" library="robot_manager" type="setup">
 <doc>所有测试用例执行之前执行的功能
 :return:</doc>
-<msg timestamp="20210310 11:35:23.010" level="INFO">------start------</msg>
-<status status="PASS" starttime="20210310 11:35:23.010" endtime="20210310 11:35:23.010"></status>
+<msg timestamp="20210311 11:05:39.165" level="INFO">------start------</msg>
+<status status="PASS" starttime="20210311 11:05:39.165" endtime="20210311 11:05:39.165"></status>
 </kw>
 <test id="s1-t1" name="case009">
 <kw name="Setup" library="robot_manager" type="setup">
-<msg timestamp="20210310 11:35:23.012" level="INFO">------setup------</msg>
-<msg timestamp="20210310 11:35:23.014" level="INFO">open driver: 0</msg>
-<msg timestamp="20210310 11:35:23.017" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210310 11:35:23.018" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210310 11:35:23.011" endtime="20210310 11:35:23.018"></status>
+<msg timestamp="20210311 11:05:39.169" level="INFO">------setup------</msg>
+<msg timestamp="20210311 11:05:39.174" level="INFO">open driver: 0</msg>
+<msg timestamp="20210311 11:05:39.175" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210311 11:05:39.175" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210311 11:05:39.168" endtime="20210311 11:05:39.175"></status>
 </kw>
 <kw name="Fota Enable Precondition" library="fota_enable">
 <doc>FOTA使能前提条件
@@ -28,23 +28,23 @@
 <arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210310 11:35:23.020" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210310 11:35:23.018" endtime="20210310 11:35:23.020"></status>
+<msg timestamp="20210311 11:05:39.179" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210311 11:05:39.175" endtime="20210311 11:05:39.179"></status>
 </kw>
 <kw name="Teardown" library="robot_manager" type="teardown">
-<msg timestamp="20210310 11:35:23.021" level="INFO">------teardown------</msg>
-<status status="PASS" starttime="20210310 11:35:23.021" endtime="20210310 11:35:23.021"></status>
+<msg timestamp="20210311 11:05:39.180" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210311 11:05:39.180" endtime="20210311 11:05:39.180"></status>
 </kw>
 <doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件满足</doc>
-<status status="FAIL" starttime="20210310 11:35:23.010" endtime="20210310 11:35:23.021" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<status status="FAIL" starttime="20210311 11:05:39.165" endtime="20210311 11:05:39.180" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
 </test>
 <test id="s1-t2" name="case010">
 <kw name="Setup" library="robot_manager" type="setup">
-<msg timestamp="20210310 11:35:23.023" level="INFO">------setup------</msg>
-<msg timestamp="20210310 11:35:23.023" level="INFO">open driver: 0</msg>
-<msg timestamp="20210310 11:35:23.024" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210310 11:35:23.024" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210310 11:35:23.023" endtime="20210310 11:35:23.024"></status>
+<msg timestamp="20210311 11:05:39.183" level="INFO">------setup------</msg>
+<msg timestamp="20210311 11:05:39.184" level="INFO">open driver: 0</msg>
+<msg timestamp="20210311 11:05:39.184" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210311 11:05:39.185" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210311 11:05:39.183" endtime="20210311 11:05:39.185"></status>
 </kw>
 <kw name="Fota Enable Precondition" library="fota_enable">
 <doc>FOTA使能前提条件
@@ -59,23 +59,23 @@
 <arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210310 11:35:23.025" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210310 11:35:23.024" endtime="20210310 11:35:23.025"></status>
+<msg timestamp="20210311 11:05:39.187" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210311 11:05:39.185" endtime="20210311 11:05:39.187"></status>
 </kw>
 <kw name="Teardown" library="robot_manager" type="teardown">
-<msg timestamp="20210310 11:35:23.026" level="INFO">------teardown------</msg>
-<status status="PASS" starttime="20210310 11:35:23.026" endtime="20210310 11:35:23.026"></status>
+<msg timestamp="20210311 11:05:39.187" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210311 11:05:39.187" endtime="20210311 11:05:39.187"></status>
 </kw>
 <doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - FOTA使能功能未使能</doc>
-<status status="FAIL" starttime="20210310 11:35:23.021" endtime="20210310 11:35:23.026" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<status status="FAIL" starttime="20210311 11:05:39.180" endtime="20210311 11:05:39.187" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
 </test>
 <test id="s1-t3" name="case011">
 <kw name="Setup" library="robot_manager" type="setup">
-<msg timestamp="20210310 11:35:23.028" level="INFO">------setup------</msg>
-<msg timestamp="20210310 11:35:23.029" level="INFO">open driver: 0</msg>
-<msg timestamp="20210310 11:35:23.029" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210310 11:35:23.029" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210310 11:35:23.028" endtime="20210310 11:35:23.029"></status>
+<msg timestamp="20210311 11:05:39.191" level="INFO">------setup------</msg>
+<msg timestamp="20210311 11:05:39.192" level="INFO">open driver: 0</msg>
+<msg timestamp="20210311 11:05:39.192" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210311 11:05:39.192" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210311 11:05:39.190" endtime="20210311 11:05:39.192"></status>
 </kw>
 <kw name="Fota Enable Precondition" library="fota_enable">
 <doc>FOTA使能前提条件
@@ -90,23 +90,23 @@
 <arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210310 11:35:23.030" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210310 11:35:23.029" endtime="20210310 11:35:23.030"></status>
+<msg timestamp="20210311 11:05:39.195" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210311 11:05:39.193" endtime="20210311 11:05:39.195"></status>
 </kw>
 <kw name="Teardown" library="robot_manager" type="teardown">
-<msg timestamp="20210310 11:35:23.031" level="INFO">------teardown------</msg>
-<status status="PASS" starttime="20210310 11:35:23.031" endtime="20210310 11:35:23.031"></status>
+<msg timestamp="20210311 11:05:39.195" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210311 11:05:39.195" endtime="20210311 11:05:39.195"></status>
 </kw>
 <doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 设置系统电源模式为OFF</doc>
-<status status="FAIL" starttime="20210310 11:35:23.026" endtime="20210310 11:35:23.031" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<status status="FAIL" starttime="20210311 11:05:39.188" endtime="20210311 11:05:39.195" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
 </test>
 <test id="s1-t4" name="case012">
 <kw name="Setup" library="robot_manager" type="setup">
-<msg timestamp="20210310 11:35:23.033" level="INFO">------setup------</msg>
-<msg timestamp="20210310 11:35:23.034" level="INFO">open driver: 0</msg>
-<msg timestamp="20210310 11:35:23.034" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210310 11:35:23.034" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210310 11:35:23.033" endtime="20210310 11:35:23.034"></status>
+<msg timestamp="20210311 11:05:39.199" level="INFO">------setup------</msg>
+<msg timestamp="20210311 11:05:39.199" level="INFO">open driver: 0</msg>
+<msg timestamp="20210311 11:05:39.200" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210311 11:05:39.200" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210311 11:05:39.198" endtime="20210311 11:05:39.200"></status>
 </kw>
 <kw name="Fota Enable Precondition" library="fota_enable">
 <doc>FOTA使能前提条件
@@ -121,23 +121,23 @@
 <arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210310 11:35:23.035" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210310 11:35:23.034" endtime="20210310 11:35:23.035"></status>
+<msg timestamp="20210311 11:05:39.202" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210311 11:05:39.200" endtime="20210311 11:05:39.202"></status>
 </kw>
 <kw name="Teardown" library="robot_manager" type="teardown">
-<msg timestamp="20210310 11:35:23.036" level="INFO">------teardown------</msg>
-<status status="PASS" starttime="20210310 11:35:23.035" endtime="20210310 11:35:23.036"></status>
+<msg timestamp="20210311 11:05:39.202" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210311 11:05:39.202" endtime="20210311 11:05:39.203"></status>
 </kw>
 <doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 设置外网不可访问</doc>
-<status status="FAIL" starttime="20210310 11:35:23.031" endtime="20210310 11:35:23.036" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<status status="FAIL" starttime="20210311 11:05:39.196" endtime="20210311 11:05:39.203" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
 </test>
 <test id="s1-t5" name="case013">
 <kw name="Setup" library="robot_manager" type="setup">
-<msg timestamp="20210310 11:35:23.038" level="INFO">------setup------</msg>
-<msg timestamp="20210310 11:35:23.038" level="INFO">open driver: 0</msg>
-<msg timestamp="20210310 11:35:23.038" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210310 11:35:23.039" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210310 11:35:23.038" endtime="20210310 11:35:23.039"></status>
+<msg timestamp="20210311 11:05:39.206" level="INFO">------setup------</msg>
+<msg timestamp="20210311 11:05:39.206" level="INFO">open driver: 0</msg>
+<msg timestamp="20210311 11:05:39.207" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210311 11:05:39.207" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210311 11:05:39.205" endtime="20210311 11:05:39.207"></status>
 </kw>
 <kw name="Disconnect Ecu" library="fota_vehicle_upload">
 <doc>断开指定ECU
@@ -148,7 +148,7 @@
 <arg>IAM</arg>
 <arg>ICC</arg>
 </arguments>
-<status status="PASS" starttime="20210310 11:35:23.039" endtime="20210310 11:35:23.039"></status>
+<status status="PASS" starttime="20210311 11:05:39.207" endtime="20210311 11:05:39.207"></status>
 </kw>
 <kw name="Fota Enable Precondition" library="fota_enable">
 <doc>FOTA使能前提条件
@@ -163,23 +163,23 @@
 <arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210310 11:35:23.040" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210310 11:35:23.039" endtime="20210310 11:35:23.040"></status>
+<msg timestamp="20210311 11:05:39.210" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210311 11:05:39.208" endtime="20210311 11:05:39.210"></status>
 </kw>
 <kw name="Teardown" library="robot_manager" type="teardown">
-<msg timestamp="20210310 11:35:23.041" level="INFO">------teardown------</msg>
-<status status="PASS" starttime="20210310 11:35:23.040" endtime="20210310 11:35:23.041"></status>
+<msg timestamp="20210311 11:05:39.211" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210311 11:05:39.211" endtime="20210311 11:05:39.211"></status>
 </kw>
 <doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 物流清单解析失败</doc>
-<status status="FAIL" starttime="20210310 11:35:23.036" endtime="20210310 11:35:23.041" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<status status="FAIL" starttime="20210311 11:05:39.203" endtime="20210311 11:05:39.211" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
 </test>
 <test id="s1-t6" name="case014">
 <kw name="Setup" library="robot_manager" type="setup">
-<msg timestamp="20210310 11:35:23.043" level="INFO">------setup------</msg>
-<msg timestamp="20210310 11:35:23.043" level="INFO">open driver: 0</msg>
-<msg timestamp="20210310 11:35:23.044" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210310 11:35:23.044" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210310 11:35:23.043" endtime="20210310 11:35:23.044"></status>
+<msg timestamp="20210311 11:05:39.215" level="INFO">------setup------</msg>
+<msg timestamp="20210311 11:05:39.216" level="INFO">open driver: 0</msg>
+<msg timestamp="20210311 11:05:39.216" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210311 11:05:39.216" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210311 11:05:39.215" endtime="20210311 11:05:39.216"></status>
 </kw>
 <kw name="Fota Enable Precondition" library="fota_enable">
 <doc>FOTA使能前提条件
@@ -194,23 +194,23 @@
 <arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210310 11:35:23.045" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210310 11:35:23.044" endtime="20210310 11:35:23.045"></status>
+<msg timestamp="20210311 11:05:39.219" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210311 11:05:39.217" endtime="20210311 11:05:39.219"></status>
 </kw>
 <kw name="Teardown" library="robot_manager" type="teardown">
-<msg timestamp="20210310 11:35:23.046" level="INFO">------teardown------</msg>
-<status status="PASS" starttime="20210310 11:35:23.045" endtime="20210310 11:35:23.046"></status>
+<msg timestamp="20210311 11:05:39.219" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210311 11:05:39.219" endtime="20210311 11:05:39.220"></status>
 </kw>
 <doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 获取超时</doc>
-<status status="FAIL" starttime="20210310 11:35:23.041" endtime="20210310 11:35:23.046" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<status status="FAIL" starttime="20210311 11:05:39.212" endtime="20210311 11:05:39.220" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
 </test>
 <test id="s1-t7" name="case015">
 <kw name="Setup" library="robot_manager" type="setup">
-<msg timestamp="20210310 11:35:23.048" level="INFO">------setup------</msg>
-<msg timestamp="20210310 11:35:23.048" level="INFO">open driver: 0</msg>
-<msg timestamp="20210310 11:35:23.049" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210310 11:35:23.049" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210310 11:35:23.047" endtime="20210310 11:35:23.049"></status>
+<msg timestamp="20210311 11:05:39.223" level="INFO">------setup------</msg>
+<msg timestamp="20210311 11:05:39.224" level="INFO">open driver: 0</msg>
+<msg timestamp="20210311 11:05:39.224" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210311 11:05:39.225" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210311 11:05:39.223" endtime="20210311 11:05:39.225"></status>
 </kw>
 <kw name="Fota Enable Precondition" library="fota_enable">
 <doc>FOTA使能前提条件
@@ -225,23 +225,23 @@
 <arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210310 11:35:23.050" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210310 11:35:23.049" endtime="20210310 11:35:23.050"></status>
+<msg timestamp="20210311 11:05:39.228" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210311 11:05:39.225" endtime="20210311 11:05:39.228"></status>
 </kw>
 <kw name="Teardown" library="robot_manager" type="teardown">
-<msg timestamp="20210310 11:35:23.051" level="INFO">------teardown------</msg>
-<status status="PASS" starttime="20210310 11:35:23.050" endtime="20210310 11:35:23.051"></status>
+<msg timestamp="20210311 11:05:39.229" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210311 11:05:39.229" endtime="20210311 11:05:39.229"></status>
 </kw>
 <doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 获取成功</doc>
-<status status="FAIL" starttime="20210310 11:35:23.046" endtime="20210310 11:35:23.051" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<status status="FAIL" starttime="20210311 11:05:39.220" endtime="20210311 11:05:39.229" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
 </test>
 <test id="s1-t8" name="case016">
 <kw name="Setup" library="robot_manager" type="setup">
-<msg timestamp="20210310 11:35:23.053" level="INFO">------setup------</msg>
-<msg timestamp="20210310 11:35:23.053" level="INFO">open driver: 0</msg>
-<msg timestamp="20210310 11:35:23.053" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210310 11:35:23.054" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210310 11:35:23.053" endtime="20210310 11:35:23.054"></status>
+<msg timestamp="20210311 11:05:39.231" level="INFO">------setup------</msg>
+<msg timestamp="20210311 11:05:39.232" level="INFO">open driver: 0</msg>
+<msg timestamp="20210311 11:05:39.233" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210311 11:05:39.233" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210311 11:05:39.231" endtime="20210311 11:05:39.233"></status>
 </kw>
 <kw name="Fota Enable Precondition" library="fota_enable">
 <doc>FOTA使能前提条件
@@ -256,23 +256,23 @@
 <arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210310 11:35:23.055" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210310 11:35:23.054" endtime="20210310 11:35:23.055"></status>
+<msg timestamp="20210311 11:05:39.235" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210311 11:05:39.233" endtime="20210311 11:05:39.235"></status>
 </kw>
 <kw name="Teardown" library="robot_manager" type="teardown">
-<msg timestamp="20210310 11:35:23.055" level="INFO">------teardown------</msg>
-<status status="PASS" starttime="20210310 11:35:23.055" endtime="20210310 11:35:23.055"></status>
+<msg timestamp="20210311 11:05:39.235" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210311 11:05:39.235" endtime="20210311 11:05:39.236"></status>
 </kw>
 <doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置ICC防火墙认证失败</doc>
-<status status="FAIL" starttime="20210310 11:35:23.051" endtime="20210310 11:35:23.055" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<status status="FAIL" starttime="20210311 11:05:39.230" endtime="20210311 11:05:39.236" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
 </test>
 <test id="s1-t9" name="case017">
 <kw name="Setup" library="robot_manager" type="setup">
-<msg timestamp="20210310 11:35:23.057" level="INFO">------setup------</msg>
-<msg timestamp="20210310 11:35:23.058" level="INFO">open driver: 0</msg>
-<msg timestamp="20210310 11:35:23.058" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210310 11:35:23.058" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210310 11:35:23.057" endtime="20210310 11:35:23.058"></status>
+<msg timestamp="20210311 11:05:39.239" level="INFO">------setup------</msg>
+<msg timestamp="20210311 11:05:39.239" level="INFO">open driver: 0</msg>
+<msg timestamp="20210311 11:05:39.240" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210311 11:05:39.240" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210311 11:05:39.238" endtime="20210311 11:05:39.240"></status>
 </kw>
 <kw name="Fota Enable Precondition" library="fota_enable">
 <doc>FOTA使能前提条件
@@ -287,23 +287,23 @@
 <arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210310 11:35:23.060" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210310 11:35:23.058" endtime="20210310 11:35:23.060"></status>
+<msg timestamp="20210311 11:05:39.242" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210311 11:05:39.240" endtime="20210311 11:05:39.242"></status>
 </kw>
 <kw name="Teardown" library="robot_manager" type="teardown">
-<msg timestamp="20210310 11:35:23.060" level="INFO">------teardown------</msg>
-<status status="PASS" starttime="20210310 11:35:23.060" endtime="20210310 11:35:23.060"></status>
+<msg timestamp="20210311 11:05:39.243" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210311 11:05:39.242" endtime="20210311 11:05:39.243"></status>
 </kw>
 <doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置字无效</doc>
-<status status="FAIL" starttime="20210310 11:35:23.056" endtime="20210310 11:35:23.060" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<status status="FAIL" starttime="20210311 11:05:39.236" endtime="20210311 11:05:39.243" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
 </test>
 <test id="s1-t10" name="case018">
 <kw name="Setup" library="robot_manager" type="setup">
-<msg timestamp="20210310 11:35:23.062" level="INFO">------setup------</msg>
-<msg timestamp="20210310 11:35:23.062" level="INFO">open driver: 0</msg>
-<msg timestamp="20210310 11:35:23.063" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210310 11:35:23.063" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210310 11:35:23.062" endtime="20210310 11:35:23.063"></status>
+<msg timestamp="20210311 11:05:39.246" level="INFO">------setup------</msg>
+<msg timestamp="20210311 11:05:39.247" level="INFO">open driver: 0</msg>
+<msg timestamp="20210311 11:05:39.247" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210311 11:05:39.247" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210311 11:05:39.246" endtime="20210311 11:05:39.247"></status>
 </kw>
 <kw name="Fota Enable Precondition" library="fota_enable">
 <doc>FOTA使能前提条件
@@ -318,23 +318,23 @@
 <arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210310 11:35:23.064" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210310 11:35:23.063" endtime="20210310 11:35:23.064"></status>
+<msg timestamp="20210311 11:05:39.249" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210311 11:05:39.248" endtime="20210311 11:05:39.249"></status>
 </kw>
 <kw name="Teardown" library="robot_manager" type="teardown">
-<msg timestamp="20210310 11:35:23.065" level="INFO">------teardown------</msg>
-<status status="PASS" starttime="20210310 11:35:23.064" endtime="20210310 11:35:23.065"></status>
+<msg timestamp="20210311 11:05:39.250" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210311 11:05:39.250" endtime="20210311 11:05:39.250"></status>
 </kw>
 <doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置VIN不一致</doc>
-<status status="FAIL" starttime="20210310 11:35:23.060" endtime="20210310 11:35:23.065" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<status status="FAIL" starttime="20210311 11:05:39.243" endtime="20210311 11:05:39.250" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
 </test>
 <test id="s1-t11" name="case019">
 <kw name="Setup" library="robot_manager" type="setup">
-<msg timestamp="20210310 11:35:23.068" level="INFO">------setup------</msg>
-<msg timestamp="20210310 11:35:23.068" level="INFO">open driver: 0</msg>
-<msg timestamp="20210310 11:35:23.068" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210310 11:35:23.069" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210310 11:35:23.067" endtime="20210310 11:35:23.069"></status>
+<msg timestamp="20210311 11:05:39.253" level="INFO">------setup------</msg>
+<msg timestamp="20210311 11:05:39.254" level="INFO">open driver: 0</msg>
+<msg timestamp="20210311 11:05:39.254" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210311 11:05:39.254" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210311 11:05:39.253" endtime="20210311 11:05:39.255"></status>
 </kw>
 <kw name="Fota Enable Precondition" library="fota_enable">
 <doc>FOTA使能前提条件
@@ -349,23 +349,23 @@
 <arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210310 11:35:23.070" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210310 11:35:23.069" endtime="20210310 11:35:23.070"></status>
+<msg timestamp="20210311 11:05:39.257" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210311 11:05:39.255" endtime="20210311 11:05:39.257"></status>
 </kw>
 <kw name="Teardown" library="robot_manager" type="teardown">
-<msg timestamp="20210310 11:35:23.071" level="INFO">------teardown------</msg>
-<status status="PASS" starttime="20210310 11:35:23.071" endtime="20210310 11:35:23.071"></status>
+<msg timestamp="20210311 11:05:39.258" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210311 11:05:39.258" endtime="20210311 11:05:39.259"></status>
 </kw>
 <doc>使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置身份证书状态无效</doc>
-<status status="FAIL" starttime="20210310 11:35:23.065" endtime="20210310 11:35:23.071" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<status status="FAIL" starttime="20210311 11:05:39.250" endtime="20210311 11:05:39.259" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
 </test>
 <test id="s1-t12" name="case032">
 <kw name="Setup" library="robot_manager" type="setup">
-<msg timestamp="20210310 11:35:23.073" level="INFO">------setup------</msg>
-<msg timestamp="20210310 11:35:23.073" level="INFO">open driver: 0</msg>
-<msg timestamp="20210310 11:35:23.073" level="INFO">xlSetApplConfig: [0, 0]</msg>
-<msg timestamp="20210310 11:35:23.073" level="INFO">close driver: 0</msg>
-<status status="PASS" starttime="20210310 11:35:23.072" endtime="20210310 11:35:23.073"></status>
+<msg timestamp="20210311 11:05:39.261" level="INFO">------setup------</msg>
+<msg timestamp="20210311 11:05:39.262" level="INFO">open driver: 0</msg>
+<msg timestamp="20210311 11:05:39.263" level="INFO">xlSetApplConfig: [0, 0]</msg>
+<msg timestamp="20210311 11:05:39.263" level="INFO">close driver: 0</msg>
+<status status="PASS" starttime="20210311 11:05:39.261" endtime="20210311 11:05:39.263"></status>
 </kw>
 <kw name="Fota Enable Precondition" library="fota_enable">
 <doc>FOTA使能前提条件
@@ -380,24 +380,24 @@
 <arg>True</arg>
 <arg>True</arg>
 </arguments>
-<msg timestamp="20210310 11:35:23.075" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
-<status status="FAIL" starttime="20210310 11:35:23.074" endtime="20210310 11:35:23.075"></status>
+<msg timestamp="20210311 11:05:39.265" level="FAIL">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</msg>
+<status status="FAIL" starttime="20210311 11:05:39.263" endtime="20210311 11:05:39.265"></status>
 </kw>
 <kw name="Teardown" library="robot_manager" type="teardown">
-<msg timestamp="20210310 11:35:23.075" level="INFO">------teardown------</msg>
-<status status="PASS" starttime="20210310 11:35:23.075" endtime="20210310 11:35:23.075"></status>
+<msg timestamp="20210311 11:05:39.266" level="INFO">------teardown------</msg>
+<status status="PASS" starttime="20210311 11:05:39.265" endtime="20210311 11:05:39.266"></status>
 </kw>
 <doc>使能条件都满足 - 车端自动触发 - 物流数据的上传 - 物流数据上传成功</doc>
-<status status="FAIL" starttime="20210310 11:35:23.071" endtime="20210310 11:35:23.075" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
+<status status="FAIL" starttime="20210311 11:05:39.259" endtime="20210311 11:05:39.266" critical="yes">VectorError: xlGetChannelIndex failed (XL_ERR_HW_NOT_PRESENT)</status>
 </test>
 <kw name="Stop" library="robot_manager" type="teardown">
 <doc>所有测试用例执行结束之后执行的功能
 :return:</doc>
-<msg timestamp="20210310 11:35:23.076" level="INFO">------stop------</msg>
-<status status="PASS" starttime="20210310 11:35:23.076" endtime="20210310 11:35:23.076"></status>
+<msg timestamp="20210311 11:05:39.267" level="INFO">------stop------</msg>
+<status status="PASS" starttime="20210311 11:05:39.267" endtime="20210311 11:05:39.267"></status>
 </kw>
 <doc>FOTA车辆数据上传测试用例</doc>
-<status status="FAIL" starttime="20210310 11:35:21.672" endtime="20210310 11:35:23.076"></status>
+<status status="FAIL" starttime="20210311 11:05:30.784" endtime="20210311 11:05:39.267"></status>
 </suite>
 <statistics>
 <total>

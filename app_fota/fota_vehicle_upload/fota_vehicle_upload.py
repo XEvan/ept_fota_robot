@@ -108,29 +108,47 @@ def fota_get_logistics_manifest_resp(timeout=1):
     return False, "超时[%ss]未检测到云端报文：FOTA_GetLogisticsManifestResp" % str(timeout)
 
 
-def fota_check_version_req(timeout=1):
+def fota_check_version_req(times=1, timeout=1):
     """
     FOTA_CheckVersionReq
     车端上报物流信息，并请求云端是否有FOTA任务
     请求方向：车->云
+    @param times: 检测请求次数，默认1次
     :return: 解析出来的字典
     """
-    rfic_info("等待OTA后台发送FOTA_CheckVersionReq。。。")
+    res_list = []
+    for _ in range(times):
+        # 连续检测times次，
+        rfic_info("等待OTA后台发送FOTA_CheckVersionReq。。。")
 
-    # 检测并解析报文
-    current_time = time.time()  # 开始检测的时间点
-    while time.time() - current_time <= timeout:
-        # 检测报文
+        # 检测并解析报文
+        current_time = time.time()  # 开始检测的时间点
+        res = False
+        while time.time() - current_time <= timeout:
+            # 检测报文
 
-        requestInfo = {}
-        triggerInfo = {}
+            requestInfo = {}
+            triggerInfo = {}
 
-        # 明确消息 requestInfo.requestMethod="FOTA_CheckVersionReq"
-        condition1 = requestInfo.get("requestMethod") == "FOTA_CheckVersionReq"
-        # 检测到报文
-        if condition1:
-            return True, ""
-    return False, "超时[%ss]未检测到车端报文：FOTA_CheckVersionReq" % str(timeout)
+            # 明确消息 requestInfo.requestMethod="FOTA_CheckVersionReq"
+            condition1 = requestInfo.get("requestMethod") == "FOTA_CheckVersionReq"
+            # 检测到报文
+            if condition1:
+                res = True
+                break
+        res_list.append(res)
+
+    # 列表中的True的次数应该与times相等  -s
+    true_cnt = 0
+    for ele in res_list:
+        if ele:
+            true_cnt += 1
+    # 列表中的True的次数应该与times相等  -e
+    if true_cnt == times:
+        return True, ""
+    else:
+        res = False, "超时[%ss]未检测到车端报文[%s/%s]：FOTA_CheckVersionReq" % (str(timeout), true_cnt, times)
+        return res
 
 
 def result_dict_judge(meas_val, exp_val):
@@ -178,6 +196,7 @@ def fota_check_version_resp(timeout=1):
         if condition1:
             return True, ""
     return False, "超时[%ss]未检测到云端报文：FOTA_CheckVersionResp" % str(timeout)
+
 
 def firewall_certificate_config(status=True):
     """

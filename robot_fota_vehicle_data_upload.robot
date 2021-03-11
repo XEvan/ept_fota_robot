@@ -17,7 +17,7 @@ case009
     fota_assert     ${status}[0]    True    ${status}[1]
 
 case010
-	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - FOTA使能功能未使能
+	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置字无效
 	fota_enable_precondition    True    True   True    True
     sys_pwr_mode    no_off
     fota_function_enable_configuration    False
@@ -39,7 +39,7 @@ case012
     ${status}   fota_get_logistics_manifest_req
     fota_assert     ${status}[0]    False    ${status}[1]
 
-case013     #疑问
+case013     #疑问：仿真报文方案？
 	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 物流清单解析失败
 	disconnect_ecu      IAM     ICC
 	fota_enable_precondition    True    True   True    True
@@ -71,7 +71,6 @@ case015
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_get_logistics_manifest_resp
     fota_assert     ${status}[0]    True    ${status}[1]
-    # 解析${status}[1]中的ecuNum？
     result_dict_judge     ${status}[1]    responseInfo.statusCode=0
 
 case016
@@ -130,10 +129,108 @@ case019
     result_dict_judge     ${status}[1]    logisticsDatainfo.ecuNum=0
     result_dict_judge     ${status}[1]    logisticsDatainfo.logisticsDataResult=1
 
+case027
+	[Documentation]  使能条件都满足 - 车辆自动触发 - 物流数据的上传 - 物流数据上传前置条件不满足 - 配置字无效
+	fota_enable_precondition    True    True   True    True
+    sys_pwr_mode    no_off
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_get_logistics_manifest_resp
+    fota_assert     ${status}[0]    True    ${status}[1]
+    fota_function_enable_configuration      False
+    ${status}   fota_check_version_req
+    fota_assert     ${status}[0]    False    ${status}[1]
+
+case028
+	[Documentation]  使能条件都满足 - 车辆自动触发 - 物流数据的上传 - 物流数据上传前置条件不满足 - 车辆未上电
+	fota_enable_precondition    True    True   True    True
+    sys_pwr_mode    no_off
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_get_logistics_manifest_resp
+    fota_assert     ${status}[0]    True    ${status}[1]
+    sys_pwr_mode    off
+    ${status}   fota_check_version_req
+    fota_assert     ${status}[0]    False    ${status}[1]
+
+case030
+	[Documentation]  使能条件都满足 - 车辆自动触发 - 物流数据的上传 - 物流数据上传前置条件不满足 - 外网不可访问
+	fota_enable_precondition    True    True   True    True
+    sys_pwr_mode    no_off
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_get_logistics_manifest_resp
+    fota_assert     ${status}[0]    True    ${status}[1]
+    network_access    False
+    ${status}   fota_check_version_req
+    fota_assert     ${status}[0]    False    ${status}[1]
+
+case031
+	[Documentation]  使能条件都满足 - 车辆自动触发 - 物流数据的上传 - 物流数据上传前置条件不满足 - OTA后台不响应
+	fota_enable_precondition    True    True   True    True
+    sys_pwr_mode    no_off
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_get_logistics_manifest_resp
+    fota_assert     ${status}[0]    True    ${status}[1]
+    disconnect_ecu      IAM     ICC
+    ${status}   fota_check_version_req      times=4
+    fota_assert     ${status}[0]    True    ${status}[1]
+
 case032
 	[Documentation]  使能条件都满足 - 车端自动触发 - 物流数据的上传 - 物流数据上传成功
 	fota_enable_precondition    True    True   True    True
     sys_pwr_mode    no_off
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_get_logistics_manifest_resp
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_check_version_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_check_version_resp
+    fota_assert     ${status}[0]    True    ${status}[1]
+    result_dict_judge     ${status}[1]    responseInfo.statusCode=0
+
+case033
+	[Documentation]  使能条件都满足 - 云端触发 - 获取物流清单的前提条件 - 条件满足
+	fota_enable_precondition    True    True   True    True
+    ${status}   fota_triggersession
+    fota_assert     ${status}[0]    True    ${status}[1]
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    True    ${status}[1]
+
+case034
+	[Documentation]  使能条件都满足 - 云端触发 - 获取物流清单的前提条件 - 条件不满足 - 配置字无效
+	fota_enable_precondition    True    True   True    True
+    ${status}   fota_triggersession
+    fota_assert     ${status}[0]    True    ${status}[1]
+    fota_function_enable_configuration    False
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    False    ${status}[1]
+
+case035
+	[Documentation]  使能条件都满足 - 云端触发 - 获取物流清单的前提条件 - 条件不满足 - 设置系统电源模式为OFF
+	fota_enable_precondition    True    True   True    True
+    ${status}   fota_triggersession
+    fota_assert     ${status}[0]    True    ${status}[1]
+    sys_pwr_mode    off
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    False    ${status}[1]
+
+case036
+	[Documentation]  使能条件都满足 - 云端触发 - 获取物流清单的前提条件 - 条件不满足 - 外网不可访问
+	fota_enable_precondition    True    True   True    True
+    ${status}   fota_triggersession
+    fota_assert     ${status}[0]    True    ${status}[1]
+    network_access      False
+    ${status}   fota_get_logistics_manifest_req
+    fota_assert     ${status}[0]    False    ${status}[1]
+
+case056
+	[Documentation]  使能条件都满足 - 云端触发 - 获取物流清单的前提条件 - 物流数据的上传 - 物流数据上传成功
+	fota_enable_precondition    True    True   True    True
+    ${status}   fota_triggersession
+    fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_get_logistics_manifest_req
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_get_logistics_manifest_resp
