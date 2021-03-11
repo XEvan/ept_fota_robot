@@ -22,25 +22,24 @@ case0163
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_check_version_resp
     fota_assert     ${status}[0]    True    ${status}[1]
-
-	check_version_resp_update_mode_judge   ${status}[1]    0x04     # 解析是否是静默升级
+	result_dict_judge     ${status}[1]    fotaTaskInfo.updMode=0x04     # 解析是否是静默升级
     ${status}   fota_update_status_req
     fota_assert     ${status}[0]    True    ${status}[1]
-    fota_update_status_req_update_state_judge  ${status}[1]    0x02     # 下载完成
+    result_dict_judge     ${status}[1]    fotaTaskStatus.updateState=0x02     # 下载完成
     ${status}   fota_update_status_resp
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_hmi_status
     fota_assert     ${status}[0]    True    ${status}[1]
-    fota_hmi_status_update_mode_judge   ${status}[1]    0x01
+    result_dict_judge   ${status}[1]    updateStatus=0x01
     ${status}   fota_hmi_update_progress
     fota_assert     ${status}[0]    True    ${status}[1]
-    fota_hmi_update_progress_update_status_judge   ${status}[1]    0x01    # download progressing
+    result_dict_judge   ${status}[1]    updateStatus=0x01    # download progressing
     ${status}   fota_update_status_req
     fota_assert     ${status}[0]    True    ${status}[1]
-    fota_update_status_req_update_state_judge  ${status}[1]    0x05    # update progressing
+    result_dict_judge     ${status}[1]    fotaTaskStatus.updateState=0x05     # update progressing
     ${status}   fota_hmi_update_progress
     fota_assert     ${status}[0]    True    ${status}[1]
-    fota_hmi_update_progress_update_status_judge   ${status}[1]    0x00
+    result_dict_judge   ${status}[1]    updateStatus=0x00
     ${status}   fota_update_status_req
     fota_assert     ${status}[0]    True    ${status}[1]
-    fota_update_status_req_update_state_judge  ${status}[1]    0x07     # update successful
+    result_dict_judge     ${status}[1]    fotaTaskStatus.updateState=0x07     # update successful

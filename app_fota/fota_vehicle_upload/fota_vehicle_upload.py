@@ -113,7 +113,7 @@ def fota_check_version_req(timeout=1):
     FOTA_CheckVersionReq
     车端上报物流信息，并请求云端是否有FOTA任务
     请求方向：车->云
-    :return:
+    :return: 解析出来的字典
     """
     rfic_info("等待OTA后台发送FOTA_CheckVersionReq。。。")
 
@@ -131,6 +131,28 @@ def fota_check_version_req(timeout=1):
         if condition1:
             return True, ""
     return False, "超时[%ss]未检测到车端报文：FOTA_CheckVersionReq" % str(timeout)
+
+
+def result_dict_judge(meas_val, exp_val):
+    """
+    解析的结果与期望结果的判定是否一致
+    逐级列出，以点号隔开，如：logisticsDatainfo.ecuNum=0
+    :param meas_val: 解析出来的结果，字典形式的字符串
+    :param exp_val: 预期结果，字典形式的字符串
+        logisticsDatainfo.ecuNum=0
+    :return:
+    """
+    meas_val = eval(str(meas_val))  # 字典格式，解析到的完整数据包
+    keys_str, exp_val = str(exp_val).split("=")  # ["logisticsDatainfo.ecuNum", "0"]
+    key_list = keys_str.split(".")
+
+    for key in key_list:
+        meas_val = meas_val.get(key, {})  # 不断迭代到对应的层级，获取最终的结果
+
+    if str(meas_val) == str(exp_val):
+        assert True, ""
+    else:
+        assert False, "%s的值不匹配, meas_v=[%s], exp_v=[%s]" % (keys_str, meas_val, exp_val)
 
 
 def fota_check_version_resp(timeout=1):
@@ -156,21 +178,6 @@ def fota_check_version_resp(timeout=1):
         if condition1:
             return True, ""
     return False, "超时[%ss]未检测到云端报文：FOTA_CheckVersionResp" % str(timeout)
-
-
-def check_version_resp_update_mode_judge(meas_val, exp_val):
-    """
-    对FOTA_CheckVersionResp消息中的fotaTaskInfo.updMode与期望值进行判断
-    传进来的值是字符串形式，需要转换
-    :param meas_val:
-    :param exp_val:
-    :return:
-    """
-    if meas_val == exp_val:
-        assert True, ""
-    else:
-        assert False, "update mode not match[meas=%s][expected=%s]" % (str(meas_val), str(exp_val))
-
 
 def firewall_certificate_config(status=True):
     """

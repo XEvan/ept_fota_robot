@@ -42,8 +42,7 @@ case066
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_update_status_req
     fota_assert     ${status}[0]    True    ${status}[1]
-    # 判断${status}[1]中的updateState=0x0F则OK
-    fota_update_status_req_update_state_judge  ${status}[1]    0x0F
+    result_dict_judge     ${status}[1]    fotaTaskStatus.updateState=0x0F
 
 case069
 	[Documentation]  使能条件都满足 - 云端触发 - 判断任务是否可执行 - 有升级任务 - 任务可用
@@ -60,4 +59,4 @@ case069
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_update_status_req
     fota_assert     ${status}[0]    True    ${status}[1]
-    fota_update_status_req_update_state_judge  ${status}[1]    0x00
+    result_dict_judge     ${status}[1]    fotaTaskStatus.updateState=0x00

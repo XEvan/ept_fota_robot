@@ -5,6 +5,14 @@ from aw_lib.aw_manager import AwManager
 
 
 def network_access(enable=True):
+    """
+    串口通信
+        开启：route add default 172.31.8.18
+        开启默认网关：route add default 172.31.8.18
+        关闭:  route del default
+    :param enable:
+    :return:
+    """
     return True
 
 
@@ -27,19 +35,26 @@ def fota_function_enable_configuration(enable=True):
         data = [0x04, 0x2E, 0xC9, 0x10, 0xC0]
     else:
         data = [0x04, 0x2E, 0xC9, 0x10, 0x40]
-    AwManager.xldriver_channelbased_can_manager.can_send_in_single(can_id, data, expected_can_id=0x718)
+    AwManager.xldriver_channelbased_can_manager.can_send_single_frame(can_id, data, expected_can_id=0x718)
     return True
 
 
 def vin_validate(status=True):
     """
     ICC存储的VIN与BCM通过CAN总线发送的VIN一致性校验
+    VIN的设置，
+        CANID：0x710
+        DID:F190
+        DATA：17byte（VIN码）需要用连续帧去发。
     :param enable: True:一致  False:不一致
     :return:
     """
     status = eval(str(status))
-    # ICC的VIN码：F190
-    # 车辆VIN不匹配(BCM&ICC)：D500
+    can_id = 0x710
+    sid = 0x2E  # ?
+    did = 0xF190
+    data = []
+    AwManager.xldriver_channelbased_can_manager.can_send_multi_frame(can_id, sid, did, data, expected_can_id=0x718)
     return True
 
 
@@ -61,7 +76,7 @@ def security_vehicle_identification_certificate_status(status=True):
         data = [0x04, 0x2E, 0xB9, 0x33, 0x01]
     else:
         data = [0x04, 0x2E, 0xC9, 0x10, 0x00]
-    AwManager.xldriver_channelbased_can_manager.can_send_in_single(can_id, data, expected_can_id=0x718)
+    AwManager.xldriver_channelbased_can_manager.can_send_single_frame(can_id, data, expected_can_id=0x718)
     return True
 
 

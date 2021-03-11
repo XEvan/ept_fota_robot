@@ -50,6 +50,8 @@ case013     #疑问
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_check_version_req
     fota_assert     ${status}[0]    False    ${status}[1]
+    result_dict_judge     ${status}[1]    logisticsDatainfo.ecuNum=0
+    result_dict_judge     ${status}[1]    logisticsDatainfo.logisticsDataResult=7
 
 case014
 	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 获取超时
@@ -70,6 +72,7 @@ case015
     ${status}   fota_get_logistics_manifest_resp
     fota_assert     ${status}[0]    True    ${status}[1]
     # 解析${status}[1]中的ecuNum？
+    result_dict_judge     ${status}[1]    responseInfo.statusCode=0
 
 case016
 	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置ICC防火墙认证失败
@@ -82,7 +85,8 @@ case016
     firewall_certificate_config     False
     ${status}   fota_check_version_req
     fota_assert     ${status}[0]    True    ${status}[1]
-    # 解析${status}[1]中的ecuNum=0,LogisticsDatainfo=None？
+    result_dict_judge     ${status}[1]    logisticsDatainfo.ecuNum=0
+    result_dict_judge     ${status}[1]    logisticsDatainfo.logisticsDataResult=1
 
 case017
 	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置字无效
@@ -95,7 +99,8 @@ case017
     fota_function_enable_configuration     False
     ${status}   fota_check_version_req
     fota_assert     ${status}[0]    True    ${status}[1]
-    # 解析${status}[1]中的ecuNum=0,LogisticsDatainfo=None？
+    result_dict_judge     ${status}[1]    logisticsDatainfo.ecuNum=0
+    result_dict_judge     ${status}[1]    logisticsDatainfo.logisticsDataResult=3
 
 case018
 	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置VIN不一致
@@ -108,7 +113,8 @@ case018
     vin_validate     False
     ${status}   fota_check_version_req
     fota_assert     ${status}[0]    True    ${status}[1]
-    # 解析${status}[1]中的ecuNum=0,LogisticsDatainfo=None？
+    result_dict_judge     ${status}[1]    logisticsDatainfo.ecuNum=0
+    result_dict_judge     ${status}[1]    logisticsDatainfo.logisticsDataResult=4
 
 case019
 	[Documentation]  使能条件都满足 - 车端自动触发 - 获取物流清单的前提条件不满足 - 配置身份证书状态无效
@@ -121,7 +127,8 @@ case019
     security_vehicle_identification_certificate_status     False
     ${status}   fota_check_version_req
     fota_assert     ${status}[0]    True    ${status}[1]
-    # 解析${status}[1]中的ecuNum=0,LogisticsDatainfo=None？
+    result_dict_judge     ${status}[1]    logisticsDatainfo.ecuNum=0
+    result_dict_judge     ${status}[1]    logisticsDatainfo.logisticsDataResult=1
 
 case032
 	[Documentation]  使能条件都满足 - 车端自动触发 - 物流数据的上传 - 物流数据上传成功
@@ -135,3 +142,4 @@ case032
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_check_version_resp
     fota_assert     ${status}[0]    True    ${status}[1]
+    result_dict_judge     ${status}[1]    responseInfo.statusCode=0

@@ -25,6 +25,6 @@ def hw_teardown():
 
 
 def hello(a=1, b=2):
-
-    print(a==b)
+    a = eval(str(a))
+    print(type(a["logisticsDatainfo"]["logisticsDataResult"]))
     return True, "123"

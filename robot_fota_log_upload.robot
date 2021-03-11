@@ -16,7 +16,7 @@ case0259
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_update_status_req
     fota_assert     ${status}[0]    True    ${status}[1]
-    fota_update_status_req_update_state_judge  ${status}[1]    0x07     # update successful
+    result_dict_judge     ${status}[1]    fotaTaskStatus.updateState=0x07     # update successful
 
     ${status}   fota_triggersession     GetLog
     fota_assert     ${status}[0]    True    ${status}[1]

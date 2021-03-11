@@ -80,6 +80,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\aw_lib\aw_manager.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\aw_lib\xldriver_lib\xldriver_channelbased_lib\can_lib\channelbased_can_controller.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\aw_lib\xldriver_lib\xldriver_channelbased_lib\can_lib\channelbased_can_tx.py">
           <value>
             <Attribute>
