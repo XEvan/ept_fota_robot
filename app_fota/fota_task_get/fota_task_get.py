@@ -1,3 +1,5 @@
+import time
+
 from logger import rfic_info
 
 """
@@ -5,7 +7,7 @@ from logger import rfic_info
 """
 
 
-def fota_update_status_req():
+def fota_update_status_req(times=1, timeout=1):
     """
     FOTA_UpdateStatusReq
     车端上报升级任务状态
@@ -13,7 +15,40 @@ def fota_update_status_req():
     :return: 返回解析出来的消息
     """
     rfic_info("等待ICC发送FOTA_UpdateStatusReq。。。")
-    return True, ""
+    res_list = []
+    for _ in range(times):
+        # 连续检测times次，
+        rfic_info("等待ICC发送FOTA_UpdateStatusReq。。。")
+
+        # 检测并解析报文
+        current_time = time.time()  # 开始检测的时间点
+        res = False
+        while time.time() - current_time <= timeout:
+            # 检测报文
+
+            requestInfo = {}
+            triggerInfo = {}
+
+            # 明确消息 requestInfo.requestMethod="FOTA_CheckVersionReq"
+            condition1 = requestInfo.get("requestMethod") == "FOTA_UpdateStatusReq"
+            # 检测到报文
+            if condition1:
+                res = True
+                break
+        res_list.append(res)
+
+    # 列表中的True的次数应该与times相等  -s
+    true_cnt = 0
+    for ele in res_list:
+        if ele:
+            true_cnt += 1
+    # 列表中的True的次数应该与times相等  -e
+    if true_cnt == times:
+        return True, ""
+    else:
+        return False, "超时[%ss]未检测到车端报文[%s/%s]：FOTA_UpdateStatusReq" % (str(timeout), true_cnt, times)
+
+
 
 def fota_update_status_req_update_state_judge(meas_val, exp_val):
     """

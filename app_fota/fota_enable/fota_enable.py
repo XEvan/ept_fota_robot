@@ -86,10 +86,10 @@ def sys_pwr_mode(mode="off"):
     :param mode: off->OFF, no_off->非OFF
     :return:
     """
-    return True
+    return True, ""
 
 
-def fota_enable_precondition(network=True, conf=True, vin=True, cert=True):
+def fota_enable_success(network=True, conf=True, vin=True, cert=True):
     """
     FOTA使能前提条件
     :param network: 网络是否可访问，默认可访问
@@ -102,3 +102,25 @@ def fota_enable_precondition(network=True, conf=True, vin=True, cert=True):
     fota_function_enable_configuration(eval(str(conf)))  # 配置字是否有效
     vin_validate(eval(str(vin)))  # VIN是否一致
     security_vehicle_identification_certificate_status(eval(str(cert)))  # 身份证书是否已获取
+
+
+def diagnosis_config(monitor_enable=True, access_status=True):
+    """
+    配置：
+        ①诊断OBD诊断设备的DID监控使能状态
+        ②诊断仪接入状态
+    :param monitor_enable: 监控使能状态，True表示监控使能
+    :param access_status: 诊断仪接入状态，True表示已接入
+    :return:
+    """
+    monitor_enable = eval(str(monitor_enable))
+    access_status = eval(str(access_status))
+    return True
+
+
+def vehicle_sleep(enable=True):
+    """
+    设置车辆休眠
+    @:param enable: True表示设置车辆休眠
+    :return:
+    """

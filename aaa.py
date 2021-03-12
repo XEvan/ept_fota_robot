@@ -14,9 +14,10 @@ def start_tcp(target_ip, target_port):
     global sport, s_seq, d_seq  # 主要是用于TCP3此握手建立连接后继续发送数据
     # 第一次握手，发送SYN包
     # Ether(src="00:11:22:33:44:55", dst="55:44:33:22:11:00") /
-    ether = Ether(src="54:05:db:8e:83:03", dst="aa:bb:cc:dd:ee:03")
+    ether = Ether(src="aa:bb:cc:dd:ee:01", dst="aa:bb:cc:dd:ee:03")
     ip = IP(src="192.168.0.101", dst="192.168.0.102", flags=2)
-    tcp = TCP(sport=55555, dport=49101, seq=RandInt(), ack=0, flags=0x02, window=8192)
+    tcp = TCP(sport=55555, dport=49101, seq=RandInt(), ack=0, flags="S", window=64240,
+              options=[('MSS', 1460), ('NOP', 0), ('WScale', 8), ('NOP', 0), ('NOP', 0), ('SACK', 2)])
     ans = srp(ether / ip / tcp, iface="Intel(R) Ethernet Connection (10) I219-V", verbose=False)
     print(ans[0][TCP][0])
     sport = ans[0][TCP][0][1].dport  # 源随机端口
@@ -26,7 +27,7 @@ def start_tcp(target_ip, target_port):
 
     # # 第三次握手，发送ACK确认包
     # send(IP(dst=target_ip) / TCP(dport=target_port, sport=sport, ack=d_seq, seq=s_seq, flags='A'), verbose=False)
-    tcp = TCP(sport=55555, dport=49101, seq=s_seq, ack=d_seq, flags=0x010)
+    tcp = TCP(sport=sport, dport=49101, seq=s_seq, ack=d_seq, flags="A")
     ans = srp(ether / ip / tcp, iface="Intel(R) Ethernet Connection (10) I219-V", verbose=False)
     # print(ans[0][IP][0][0].src)
     # sport = ans[0][TCP][0][0].dport  # 源随机端口
@@ -53,5 +54,5 @@ def trans_data(target_ip, target_port, data):
 
 
 if __name__ == '__main__':
-    # start_tcp(target_ip, target_port)
-    trans_data(target_ip, target_port, data)
+    start_tcp(target_ip, target_port)
+    # trans_data(target_ip, target_port, data)

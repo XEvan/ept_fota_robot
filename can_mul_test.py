@@ -1,21 +1,13 @@
 import copy
+import threading
 import time
-from ctypes import byref, c_uint
 
 import can
 from can import Message
-from can.interfaces.vector import VectorBus
-
-from aw_lib.xldriver_lib.xldriver_channelbased_lib.can_lib.structures_tx import XLevent
-from aw_lib.xldriver_lib.xldriver_channelbased_lib.channelbased import ChannelBased
-from aw_lib.xldriver_lib.xldriver_channelbased_lib.channelbased_constants import ChannelBasedConstants
-from logger import rfic_info
 
 
-class ChannelBasedCanTx(ChannelBased):
+class Test:
     def __init__(self):
-        super(ChannelBasedCanTx, self).__init__()
-
         self.validate_status = False  # 是否需要等待响应报文，False为不需要或者已经得到响应
         self.expected_can_id = 0x00  # 期望收到的can信号的id
         self.response = None
@@ -28,10 +20,8 @@ class ChannelBasedCanTx(ChannelBased):
         :return:canAppName, channels, bitrate
         """
         # 获取配置文件中的配置信息  -s
-        canAppName = str(self.canAppName.value, encoding="utf-8")  # CAN Application的name
-        channels = []  # 配置文件中的CAN相关的AppChannel
-        for name, ch in self.canAppChannel.items():
-            channels.append(ch["appChannel"])
+        canAppName = "OTACanTest"  # str(self.canAppName.value, encoding="utf-8")  # CAN Application的name
+        channels = ["0", "1"]  # 配置文件中的CAN相关的AppChannel
         bitrate = 500000
         # 获取配置文件中的配置信息  -e
         return canAppName, channels, bitrate
@@ -48,7 +38,8 @@ class ChannelBasedCanTx(ChannelBased):
         # 获取配置文件中的配置信息  -e
 
         # 回调，实例化RX VectorBus，接收总线上的报文  -s
-        bus_rx = VectorBus(channel=channels[1], app_name=canAppName, bitrate=bitrate)
+        # bus_rx = VectorBus(channel=channels[1], app_name=canAppName, bitrate=bitrate)
+        bus_rx = can.interface.Bus('virtual_ch', bustype='virtual')
         listeners = [
             rx_handle  # rx的回调
         ]
@@ -56,8 +47,9 @@ class ChannelBasedCanTx(ChannelBased):
         # 回调，实例化RX VectorBus，接收总线上的报文  -e
 
         # 实例化TX VectorBus（需要重新实例化）  -s
-        bus_tx = VectorBus(channel=channels[0], app_name=canAppName, bitrate=bitrate)
-        bus_tx.reset()  # activate channel
+        # bus_tx = VectorBus(channel=channels[0], app_name=canAppName, bitrate=bitrate)
+        # bus_tx.reset()  # activate channel
+        bus_tx = can.interface.Bus('virtual_ch', bustype='virtual')
         # 实例化TX VectorBus（需要重新实例化）  -e
         return bus_tx, bus_rx, notifier
 
@@ -65,30 +57,6 @@ class ChannelBasedCanTx(ChannelBased):
         notifier.stop()
         bus_rx.shutdown()
         bus_tx.shutdown()
-
-    # @Deprecated
-    def can_send(self, canMask, xlEvent):
-        pEventCount = c_uint(1)
-        status = self.dll.xlCanTransmit(self.canPortHandle, canMask, byref(pEventCount), byref(xlEvent))
-        rfic_info("can transmit:", status)
-
-    # @Deprecated
-    def generate_tx_data(self):
-        xlEvent = XLevent()
-
-        xlEvent.tag = ChannelBasedConstants.XL_TRANSMIT_MSG
-        xlEvent.tagData.msg.id = 0x01
-        xlEvent.tagData.msg.dlc = 8
-        xlEvent.tagData.msg.flags = 0
-        xlEvent.tagData.msg.data[0] = 1
-        xlEvent.tagData.msg.data[1] = 2
-        xlEvent.tagData.msg.data[2] = 3
-        xlEvent.tagData.msg.data[3] = 4
-        xlEvent.tagData.msg.data[4] = 5
-        xlEvent.tagData.msg.data[5] = 6
-        xlEvent.tagData.msg.data[6] = 7
-        xlEvent.tagData.msg.data[7] = 8
-        return xlEvent
 
     def wait_until(self, timeout=30):
         """
@@ -169,6 +137,7 @@ class ChannelBasedCanTx(ChannelBased):
         :param msg:
         :return:
         """
+        print(msg)
         if msg.arbitration_id == self.expected_can_id:
             if msg.data[0] == 0x30:
                 self.blocksize = hex(msg.data[1])[2:]  # 2 -> 0x02 ->"02"
@@ -176,7 +145,14 @@ class ChannelBasedCanTx(ChannelBased):
 
             self.response = msg
 
-    def can_send_multi_frame(self, id, sid, did, data, wait_ret=True, expected_can_id=0x00, timeout=30):
+    def innner_thread(self):
+
+        bus_tx = can.interface.Bus('virtual_ch', bustype='virtual')
+        for _ in range(3):
+            bus_tx.send(Message(arbitration_id=0x718, data=[0x30, 0x02, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55]))
+            time.sleep(1)
+
+    def can_send_multi_frame(self, id, sid, did, data, wait_ret=True, expected_can_id=0x00, timeout=5):
         """
         单帧
         :param id: 发送的id
@@ -184,6 +160,8 @@ class ChannelBasedCanTx(ChannelBased):
         :param wait_ret: 是否等待回复
         :return: 响应报文
         """
+        threading.Thread(target=self.innner_thread).start()
+
         self.validate_status = wait_ret  # 默认需要等待响应报文
         self.expected_can_id = expected_can_id  # 期望收到的CAN信号的id
         bus_tx, bus_rx, notifier = self.device_init(self.rx_multi_callback)  # 初始化一些变量
@@ -200,6 +178,7 @@ class ChannelBasedCanTx(ChannelBased):
 
         res = self.wait_until(timeout)  # 超时时间内等待期望结果，如果没有等到，返回False
         if not res:
+            print("没有等到期望...")
             self.driver_clean(bus_tx, bus_rx, notifier)
             return False
         # 生成首帧，并发送  -e
@@ -234,7 +213,16 @@ class ChannelBasedCanTx(ChannelBased):
 
         for cf in results:
             self.send_frame(bus_tx, id, cf)  # 剩余的CF连续发出去
+            time.sleep(0.0000005)
 
         self.driver_clean(bus_tx, bus_rx, notifier)
 
         return True, self.response
+
+
+if __name__ == '__main__':
+    t = Test()
+    while True:
+        t.can_send_multi_frame(id=0x710, sid=0x2E, did=0xF190, expected_can_id=0x718,
+                           data=[0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x10, 0x11, 0x12])
+    print("done...")

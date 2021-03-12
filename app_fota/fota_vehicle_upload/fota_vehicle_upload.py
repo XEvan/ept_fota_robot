@@ -1,6 +1,8 @@
 import time
 
 from app_fota.constants import Constants
+from app_fota.fota_enable.fota_enable import fota_enable_success, sys_pwr_mode
+from app_fota.robot_manager import fota_assert
 from logger import rfic_info
 
 """
@@ -61,11 +63,10 @@ def fota_get_logistics_manifest_req(timeout=1):
     while time.time() - current_time <= timeout:
         # 检测报文
 
-        requestInfo = {}
-        triggerInfo = {}
+        res = {}
 
         # 明确消息 requestInfo.requestMethod="FOTA_GetLogisticsManifestReq"
-        condition1 = requestInfo.get("requestMethod") == "FOTA_GetLogisticsManifestReq"
+        condition1 = res.get("requestMethod") == "FOTA_GetLogisticsManifestReq"
         # 检测到报文
         if condition1:
             # 云端触发：
@@ -77,7 +78,7 @@ def fota_get_logistics_manifest_req(timeout=1):
                 return True, ""
             else:
                 # 云端触发,Constants.request_id来自于FOTA_TriggerSession,两者正常情况下一致
-                request_id = requestInfo.get("requestId")
+                request_id = res.get("requestId")
                 condition2 = request_id == Constants.request_id
                 return condition2, ""
     return False, "超时[%ss]未检测到车端报文：FOTA_GetLogisticsManifestReq" % str(timeout)
@@ -147,8 +148,7 @@ def fota_check_version_req(times=1, timeout=1):
     if true_cnt == times:
         return True, ""
     else:
-        res = False, "超时[%ss]未检测到车端报文[%s/%s]：FOTA_CheckVersionReq" % (str(timeout), true_cnt, times)
-        return res
+        return False, "超时[%ss]未检测到车端报文[%s/%s]：FOTA_CheckVersionReq" % (str(timeout), true_cnt, times)
 
 
 def result_dict_judge(meas_val, exp_val):
@@ -229,3 +229,52 @@ def simulation_message(src_ecu_name="IAM", dst_ecu_name="ICC", message_type="err
     if message_type == "error_mnf_info":
         return True, ""
     return False, "Error"
+
+
+def ecu_data_gain_status():
+    """
+    ECU物流数据收集状态
+    :return: True表示收集完成
+    """
+    return True, ""
+
+
+def vehicle_data_list_obtain_success(trigger_type="AUTO"):
+    """
+    获取车辆物流数据清单成功
+    @:param trigger_type: 触发方式，默认车端自动触发(auto)，OTA平台触发(OTA)
+    :return:
+    """
+    fota_enable_success()  # FOTA使能正常
+    if trigger_type == "AUTO":
+        status = sys_pwr_mode("no_off")  # 系统电源模式设为"非OFF"
+    else:  # OTA触发
+        status = fota_triggersession()  # 云端下发命令触发
+    fota_assert(status[0], True, status[1])  # 期望结果是True
+
+    status = fota_get_logistics_manifest_req()
+    fota_assert(status[0], True, status[1])
+
+    status = fota_get_logistics_manifest_resp()  # 获取到车辆物流数据清单
+    fota_assert(status[0], True, status[1])  # 如果获取到了，则True，否则报错
+
+
+def ecu_data_gain_success(trigger_type="AUTO"):
+    """
+    ECU物流数据收集完成
+    :return:
+    """
+    vehicle_data_list_obtain_success(trigger_type)  # 获取车辆物流数据清单
+    status = ecu_data_gain_status()
+    fota_assert(status[0], True, status[1])  # 如果收集完成，则True，否则报错
+
+
+def vehicle_data_upload_success(trigger_type="AUTO"):
+    """
+    车辆物流数据上传完成
+    :return:
+    """
+    ecu_data_gain_success(trigger_type)  # ECU物流数据收集完成
+
+    status = fota_check_version_req()
+    fota_assert(status[0], True, status[1])

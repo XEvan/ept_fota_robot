@@ -11,7 +11,7 @@ Test Teardown     teardown    # 每条用例执行完成之后
 *** Test Cases ***
 case0163
 	[Documentation]  使能条件都满足 - 云端触发 - 静默升级 - 升级成功
-	fota_enable_precondition    True    True   True    True     #使能条件满足
+	fota_enable_success    True    True   True    True     #使能条件满足
     ${status}   fota_triggersession     # 云端触发
     fota_assert     ${status}[0]    True    ${status}[1]
     ${status}   fota_get_logistics_manifest_req
